@@ -8,7 +8,7 @@ class GoodbyeWorld extends Component {
     }
 
     render() {
-        return <h1>Goodbye World!</h1>;
+        return <h1>Good World!</h1>;
     }
 }
 
