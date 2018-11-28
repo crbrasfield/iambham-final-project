@@ -20,9 +20,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var pool = _mysql.default.createPool({
   connectionLimit: 10,
   host: 'localhost',
-  user: 'exampleUser',
-  password: 'password',
-  database: 'InClassExample'
+  user: 'clinic',
+  password: 'clinic',
+  database: 'clinic'
 });
 
 function executeQuery(_x) {

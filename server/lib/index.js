@@ -12,6 +12,8 @@ var _routes = _interopRequireDefault(require("./routes"));
 
 var _routing = _interopRequireDefault(require("./middleware/routing.mw"));
 
+var _passport = _interopRequireDefault(require("./config/passport"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CLIENT_PATH = (0, _path.join)(__dirname, '../../client');
@@ -19,6 +21,7 @@ var app = (0, _express.default)();
 app.use((0, _morgan.default)('dev'));
 app.use(_express.default.static(CLIENT_PATH));
 app.use(_express.default.json());
+(0, _passport.default)(app);
 app.use('/api', _routes.default);
 app.use(_routing.default);
 var port = process.env.PORT || 3000;
