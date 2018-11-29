@@ -83,7 +83,7 @@ class EditAppt extends Component {
         this.setState({ description: e.target.value });
     }
 
-    handleSubmit(e) {
+    async handleSubmit(e) {
         try {
             let res = await fetch('api/appointments', {
                 method: 'POST',

@@ -66,7 +66,7 @@ class Appointments extends Component {
         this.setState({description: e.target.value});
     }
 
-    handleSubmit(e) {
+   async handleSubmit(e) {
         try {
             let res = await fetch('api/appointments', {
                 method: 'POST',
@@ -82,7 +82,7 @@ class Appointments extends Component {
     render() {
         return (
 
-            <form>
+            <form action="/appointments" method="GET">
                 <div>
 
                     <div className="form-row">
@@ -97,7 +97,7 @@ class Appointments extends Component {
                         </div>
                         <div className="form-group col-md-2">
                             <label for="age"></label>
-                            <input type="number" className="form-control" aria-describedby="textHelp" placeholder="Age" onChange = {e => this.setState({age: e.target.value})} />
+                            <input type="number" className="form-control" aria-describedby="textHelp" maxLength="2" placeholder="Age" onChange = {e => this.setState({age: e.target.value})} />
                         </div>
                     </div>
 
@@ -113,7 +113,7 @@ class Appointments extends Component {
                         </div>
                         <div className="form-group col-md-3">
                             <label for="number"></label>
-                            <input type="number" className="form-control" aria-describedby="textHelp" placeholder="Phone Number" onChange = {e => this.setState({number: e.target.value})} />
+                            <input type="number" className="form-control" aria-describedby="textHelp" maxLength="10" placeholder="Phone Number" onChange = {e => this.setState({number: e.target.value})} />
                         </div>
                     </div>
 

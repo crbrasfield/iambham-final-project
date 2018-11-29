@@ -12,8 +12,8 @@ class Navigation extends Component {
                 <Fragment>
                     <Link to="/">Goodbye</Link>
                     <Switch>
-                        <Route path="/" component={GoodbyeWorld} />
-                        <Route path="/appointments" component={Appointments} />
+                        <Route exact path="/" component={GoodbyeWorld} />
+                        <Route exact path="/appointments" component={Appointments} />
                     </Switch>
                 </Fragment>
             </Router>
