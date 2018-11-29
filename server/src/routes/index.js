@@ -1,8 +1,20 @@
 import { Router } from 'express';
-import peopleRouter from './people';
+import apptRouter from './api/appointments';
+import userRouter from './api/users';
+import authRouter from './auth';
+import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
 
 let router = Router();
 
-router.use('/people', peopleRouter);
+router.use('/auth', authRouter);
+router.use('/users', userRouter);
+
+router.route('*')
+    .get(tokenMiddleware, isLoggedIn)
+    .post(tokenMiddleware, isLoggedIn)
+    .put(tokenMiddleware, isLoggedIn)
+    .delete(tokenMiddleware, isLoggedIn)
+
+router.use('/appointments', apptRouter);
 
 export default router;
