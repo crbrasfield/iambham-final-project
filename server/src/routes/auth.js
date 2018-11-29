@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import passport from 'passport';
-import { encode } from '../utils/tokens';
 
 let router = Router();
 
