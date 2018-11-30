@@ -3,7 +3,7 @@ import React from 'react';
 const Input = props => {
     return (
         <React.Fragment>
-            <form action="/appointments" method="GET" style={{ display: 'flex', justifyItems: 'center' }}>
+            <form style={{ display: 'flex', justifyItems: 'center' }}>
                 <div>
 
                     <div className="form-row">

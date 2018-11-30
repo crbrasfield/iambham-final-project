@@ -12,7 +12,7 @@ class NavBar extends Component {
         return (
             <div>
                 <div className="navbar navbar-light bg-light">
-                    <Link to="/" className="navbar-brand">NVT Health</Link>
+                    <Link to="/" className="navbar-brand">Innovate Health</Link>
                     <form className="form-inline">
                         <input className="form-control mr-sm-2" type="search" placeholder=' " I am looking for... " ' aria-label="Search"/>
                         <button className="btn btn-outline-success my-2 my-sm-0">Search</button>
