@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import apptRouter from './api/appointments';
 import userRouter from './api/users';
+import insuranceRouter from './api/insurances';
 import authRouter from './auth';
 import { isLoggedIn, tokenMiddleware } from '../middleware/auth.mw';
 
@@ -16,5 +17,6 @@ router.route('*')
     .delete(tokenMiddleware, isLoggedIn)
 
 router.use('/appointments', apptRouter);
+router.use('/insurances', insuranceRouter);
 
 export default router;
