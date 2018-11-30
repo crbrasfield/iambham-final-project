@@ -80,7 +80,7 @@ CREATE TABLE `insurances` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,6 +89,7 @@ CREATE TABLE `insurances` (
 
 LOCK TABLES `insurances` WRITE;
 /*!40000 ALTER TABLE `insurances` DISABLE KEYS */;
+INSERT INTO `insurances` VALUES (1,'Blue Cross Blue Shield'),(2,'Cigna'),(3,'United Health'),(4,'Humana'),(5,'Aetna');
 /*!40000 ALTER TABLE `insurances` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +158,10 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
   `user_type` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `insuranceid` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_insuranceid` (`insuranceid`),
+  CONSTRAINT `fk_insuranceid` FOREIGN KEY (`insuranceid`) REFERENCES `insurances` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -167,7 +171,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Christoper','Robin',2055559898,35,'crobin@email.com','robin123','doctor'),(2,'Shirley','Jackson',2055552121,47,'sjackson@email.com','jackson123','doctor'),(3,'Matthew','Rice',2055557474,20,'mrice@email.com','rice123','patient'),(4,'Cora','Ellen',2055553232,25,'cellen@email.com','ellen123','patient'),(5,'Anna Mae','Hicks',2055551245,78,'amhicks@email.com','hicks123','patient'),(6,'Bradford','Johnson',2055553214,32,'bjohnson@email.com','johnson123','doctor'),(7,'Ryan','Jones',2055557777,59,'rjones@email.com','jones123','doctor');
+INSERT INTO `users` VALUES (1,'Christoper','Robin',2055559898,35,'crobin@email.com','robin123','doctor',3),(2,'Shirley','Jackson',2055552121,47,'sjackson@email.com','jackson123','doctor',1),(3,'Matthew','Rice',2055557474,20,'mrice@email.com','rice123','patient',5),(4,'Cora','Ellen',2055553232,25,'cellen@email.com','ellen123','patient',2),(5,'Anna Mae','Hicks',2055551245,78,'amhicks@email.com','hicks123','patient',3),(6,'Bradford','Johnson',2055553214,32,'bjohnson@email.com','johnson123','doctor',4),(7,'Ryan','Jones',2055557777,59,'rjones@email.com','jones123','doctor',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -180,4 +184,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-29 11:02:40
+-- Dump completed on 2018-11-30 10:09:36
