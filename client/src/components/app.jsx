@@ -4,7 +4,9 @@ import HelloWorld from './hello';
 import GoodbyeWorld from './goodbye';
 import Appointments from './Appointments';
 import EditAppt from './EditAppt';
-import ApptDetails from './ApptDetails'
+import ApptDetails from './ApptDetails';
+import goodbye from './goodbye';
+import Appointment from './Appointment';
 
 
 class Navigation extends Component {
@@ -15,9 +17,12 @@ class Navigation extends Component {
                 <Fragment>
                     <Link to="/">Goodbye</Link>
                     <Switch>
-                        <Route exact path="/" component={GoodbyeWorld} />
                         <Route exact path="/appointments" component={Appointments} />
-                        <Route exact path="appointments/:id" component={ApptDetails} />
+
+                        {/* <Route exact path="/appointments" component={Appointments} /> */}
+                        {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
+
+                        <Route exact path="/appointments/:id" component={ApptDetails} />
                         <Route exact path="/appointments/:id/edit" component={EditAppt} />
                     </Switch>
                 </Fragment>
