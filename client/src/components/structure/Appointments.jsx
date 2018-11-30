@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import ApptTimeline from './Appointment';
+import ApptTimeline from './AppointmentCard';
 import Input from './Input';
+import * as appointmentService from '../../services/appointments';
 
 class Appointments extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            appointments:[],
             firstname: '',
             lastname: '',
             age: '',
@@ -70,15 +72,21 @@ class Appointments extends Component {
     }
 
     async handleSubmit(e) {
+        e.preventDefault();
         try {
-            let res = await fetch('api/appointments', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "applications/json"
-                },
-                body: JSON.stringify(this.state)
-            });
-            this.props.history.replace('/');
+            let res = await fetch('api/appointments' 
+            // {
+            //     method: 'POST',
+            //     headers: {
+            //         "Content-Type": "applications/json"
+            //     },
+            //     body: JSON.stringify(this.state)
+            // }
+            );
+            let appointments = await appointmentService.all();
+            this.setState(appointments);
+            console.log(this.state.appointments);
+            //this.props.history.replace('/');
         } catch (err) { }
     }
 

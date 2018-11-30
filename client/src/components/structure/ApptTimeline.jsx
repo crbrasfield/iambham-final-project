@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Appointment from './Appointment';
+import Appointment from './AppointmentCard';
+import * as appointmentService from '../../services/appointments';
 
 class ApptTimeline extends Component {
 
@@ -14,26 +15,28 @@ class ApptTimeline extends Component {
 
     async componentDidMount() {
         try {
-            let res = await fetch('/api/appointments');
-            let appt = await res.json();
-            let appts = Object.keys(appt).map(apptId => {
-                return {
-                    id: apptId,
-                    key: apptId,
-                    firstname: appt[apptId].firstname,
-                    lastname: appt[apptId].lastname,
-                    age: appt[apptId].age,
-                    email: appt[apptId].email,
-                    password: appt[apptId].password,
-                    number: appt[apptId].number,
-                    other: appt[apptId].other,
-                    description: appt[apptId].description
-                }
-            });
+            let appointments = await appointmentService.all();
+            this.setState({appts: appointments});
+            // let res = await fetch('/api/appointments');
+            // let appt = await res.json();
+            // let appts = Object.keys(appt).map(apptId => {
+            //     return {
+            //         id: apptId,
+            //         key: apptId,
+            //         firstname: appt[apptId].firstname,
+            //         lastname: appt[apptId].lastname,
+            //         age: appt[apptId].age,
+            //         email: appt[apptId].email,
+            //         password: appt[apptId].password,
+            //         number: appt[apptId].number,
+            //         other: appt[apptId].other,
+            //         description: appt[apptId].description
+            //     }
+            // });
 
-            appts.pop();
-            appts.reverse();
-            this.setState({ appts });
+            // appts.pop();
+            // appts.reverse();
+            // this.setState({ appts });
 
 
         } catch (e) { }
