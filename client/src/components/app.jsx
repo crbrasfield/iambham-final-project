@@ -6,7 +6,7 @@ import Logout from './auth/logout';
 import AuthButton from './auth/authButton';
 import NavBar from './structure/NavBar';
 import Appointments from './structure/Appointments';
-import EditAppt from './structure/EditAppt';
+import ApptEdit from './structure/ApptEdit';
 import ApptDetails from './structure/ApptDetails';
 import ApptTimeline from './structure/ApptTimeline';
 import Home from './structure/Home';
@@ -32,7 +32,7 @@ class Navigation extends Component {
                         {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
 
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
-                        <PrivateRoute exact path="/appointments/:id/edit" component={EditAppt} />
+                        <PrivateRoute exact path="/appointments/:id/edit" component={} />
                     </Switch>
                 </Fragment>
             </Router>
