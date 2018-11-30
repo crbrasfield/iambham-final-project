@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import NavBar from './NavBar';
 import Appointments from './Appointments';
 import EditAppt from './EditAppt';
-import ApptDetails from './ApptDetails'
+import ApptDetails from './ApptDetails';
+import goodbye from './goodbye';
+import Appointment from './Appointment';
 
 
 class Navigation extends Component {
@@ -15,9 +17,12 @@ class Navigation extends Component {
                 <NavBar /> 
                     <Link to="/">Goodbye</Link>
                     <Switch>
-                        <Route exact path="/" component={goodbye} />
                         <Route exact path="/appointments" component={Appointments} />
-                        <Route exact path="appointments/:id" component={ApptDetails} />
+
+                        {/* <Route exact path="/appointments" component={Appointments} /> */}
+                        {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
+
+                        <Route exact path="/appointments/:id" component={ApptDetails} />
                         <Route exact path="/appointments/:id/edit" component={EditAppt} />
                     </Switch>
                 </Fragment>
