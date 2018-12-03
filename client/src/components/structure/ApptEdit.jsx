@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Input from './Input';
 
-class EditAppt extends Component {
+class ApptEdit extends Component {
 
     constructor(props) {
         super(props);
@@ -206,4 +206,4 @@ class EditAppt extends Component {
     }
 }
 
-export default EditAppt;
+export default ApptEdit;

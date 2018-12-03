@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import passport from 'passport';
-
+import { tokenMiddleware, isLoggedIn } from '../middleware/auth.mw';
 let router = Router();
 
 router.post('/login', (req, res, next) => {
@@ -15,5 +15,11 @@ router.post('/login', (req, res, next) => {
         }
     }) (req, res, next);
 });
+
+router.get('/me', tokenMiddleware, isLoggedIn, (req, res) => {
+    console.log(req.user);
+    res.json(req.user);
+})
+
 
 export default router;
