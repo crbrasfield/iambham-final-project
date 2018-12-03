@@ -13,8 +13,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = (0, _express.Router)();
 var usersTable = new _table.default('users');
+var tokenTable = new _table.default('tokens');
 router.get('/patient/:id', function (req, res) {
   var id = req.params.id;
+  var query = "SELECT * FROM ".concat(usersTable, " WHERE id = ").concat(id, ";"); // usersTable.find(query)
+  //  .then(results => res.send(results))
+  //  .catch(err => res.send(500));
+
   usersTable.getOne(id).then(function (results) {
     return res.send(results);
   }).catch(function (err) {
@@ -23,11 +28,14 @@ router.get('/patient/:id', function (req, res) {
 });
 router.get('/doctor/:id', function (req, res) {
   var id = req.params.id;
-  usersTable.getOne(id).then(function (results) {
-    return res.send(results);
-  }).catch(function (err) {
-    return res.send(500);
-  });
+
+  if (user.user_type === "doctor") {
+    usersTable.getOne(id).then(function (results) {
+      return res.send(results);
+    }).catch(function (err) {
+      return res.send(500);
+    });
+  }
 });
 router.post('/createdoctor', function (req, res) {
   var user = req.body;

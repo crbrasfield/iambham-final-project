@@ -4,23 +4,33 @@ import Table from '../../table';
 let router = Router();
 
 let usersTable = new Table('users');
+let tokenTable = new Table('tokens');
 
 router.get('/patient/:id', (req, res) => {
     let id = req.params.id;
 
-       usersTable.getOne(id)
+    let query = `SELECT * FROM ${usersTable} WHERE id = ${id};`;
+
+    // usersTable.find(query)
+    //  .then(results => res.send(results))
+    //  .catch(err => res.send(500));
+    
+    usersTable.getOne(id)
         .then(results => res.send(results))
         .catch(err => res.send(500));
-   
+
+    
+
 });
 
 router.get('/doctor/:id', (req, res) => {
     let id = req.params.id;
 
+    if(user.user_type === "doctor") {
        usersTable.getOne(id)
         .then(results => res.send(results))
         .catch(err => res.send(500));
-   
+    }
 });
 
 router.post('/createdoctor', (req, res) => {
@@ -40,5 +50,7 @@ router.post('/createpatient', (req, res) => {
         .then(results => res.send(results))
         .catch(err => res.sendStatus(500));
 });
+
+
 
 export default router;
