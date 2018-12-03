@@ -28,9 +28,6 @@ class Navigation extends Component {
                         <Route path="/logout" component={Logout} />
                         <PrivateRoute exact path="/appointments" component={Appointments} />
                         <Route exact path="/" component={Home} />
-                        {/* <Route exact path="/appointments" component={Appointments} /> */}
-                        {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
-
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
                         <PrivateRoute exact path="/appointments/:id/edit" component={EditAppt} />
                     </Switch>
