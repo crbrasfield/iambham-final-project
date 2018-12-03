@@ -9,8 +9,6 @@ var _express = require("express");
 
 var _table = _interopRequireDefault(require("../../table"));
 
-var _auth = require("../../middleware/auth.mw");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = (0, _express.Router)();

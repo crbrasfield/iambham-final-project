@@ -32,7 +32,7 @@ class Navigation extends Component {
                         {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
 
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
-                        <PrivateRoute exact path="/appointments/:id/edit" component={} />
+                        {/* <PrivateRoute exact path="/appointments/:id/edit" component={} /> */}
                     </Switch>
                 </Fragment>
             </Router>
