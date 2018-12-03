@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import ApptTimeline from './AppointmentCard';
+import ApptTimeline from './ApptCard';
 import Input from './Input';
 import * as appointmentService from '../../services/appointments';
 

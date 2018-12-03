@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Appointment from './AppointmentCard';
+import ApptCard from './ApptCard';
 import * as appointmentService from '../../services/appointments';
 
 class ApptTimeline extends Component {
@@ -50,7 +50,7 @@ class ApptTimeline extends Component {
             <React.Fragment>
                 <div className="d-flex flex-wrap align-items-center justify-content-around" >
                     {this.state.appts.map((appt) => {
-                        return <Appointment firstname={appt.firstname}
+                        return <ApptCard firstname={appt.firstname}
                         lastname={appt.lastname}
                         age={appt.age}
                         email={appt.email}
