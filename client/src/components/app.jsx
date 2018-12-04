@@ -10,6 +10,7 @@ import ApptEdit from './structure/ApptEdit';
 import ApptDetails from './structure/ApptDetails';
 import ApptTimeline from './structure/ApptTimeline';
 import Home from './structure/Home';
+import About from './structure/About';
 
 
 
@@ -20,19 +21,17 @@ class Navigation extends Component {
             <Router>
                 <Fragment>
                 <NavBar /> 
-                    <Link to="/">Home</Link>
-                    <Link to="/appointments">Appointments</Link>
-                    <AuthButton />
                     <Switch>
                         <Route path="/login" component={Login} />
                         <Route path="/logout" component={Logout} />
                         <PrivateRoute exact path="/appointments" component={Appointments} />
                         <Route exact path="/" component={Home} />
+                        <Route exact path="/aboutInnovateHealth" component={About} />
                         {/* <Route exact path="/appointments" component={Appointments} /> */}
                         {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
 
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
-                        {/* <PrivateRoute exact path="/appointments/:id/edit" component={} /> */}
+                        <PrivateRoute exact path="/appointments/:id/edit" component={ApptEdit} />
                     </Switch>
                 </Fragment>
             </Router>
