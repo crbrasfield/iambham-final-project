@@ -11,10 +11,11 @@ router.get('/patient/:id', tokenMiddleware, isLoggedIn, (req, res, next) => {
     const user = req.user;
 
     //Will not work without {tokenMiddleware, isLoggedIn}
-    if (user.id === parseInt(id, 10)) {
+    if (user.id === parseInt(id, 10) && user.user_type == 'patient') {
         usersTable.getOne(id)
                 .then(results => {
                     res.send(results);
+                    console.log(req.user.user_type);
                 })
                 .catch(err => res.sendStatus(500));
     } else if (id !== user.id) {
@@ -27,7 +28,7 @@ router.get('/doctor/:id',tokenMiddleware, isLoggedIn, (req, res) => {
     let id = req.params.id;
     const user = req.user
 
-    if (user.id === parseInt(id, 10)) {
+    if (user.id === parseInt(id, 10) && user.user_type == 'doctor') {
         usersTable.getOne(id)
                 .then(results => {
                     res.send(results);

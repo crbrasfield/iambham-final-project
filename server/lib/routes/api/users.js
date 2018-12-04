@@ -19,9 +19,10 @@ router.get('/patient/:id', _auth.tokenMiddleware, _auth.isLoggedIn, function (re
   var id = req.params.id;
   var user = req.user; //Will not work without {tokenMiddleware, isLoggedIn}
 
-  if (user.id === parseInt(id, 10)) {
+  if (user.id === parseInt(id, 10) && user.user_type == 'patient') {
     usersTable.getOne(id).then(function (results) {
       res.send(results);
+      console.log(req.user.user_type);
     }).catch(function (err) {
       return res.sendStatus(500);
     });
@@ -33,7 +34,7 @@ router.get('/doctor/:id', _auth.tokenMiddleware, _auth.isLoggedIn, function (req
   var id = req.params.id;
   var user = req.user;
 
-  if (user.id === parseInt(id, 10)) {
+  if (user.id === parseInt(id, 10) && user.user_type == 'doctor') {
     usersTable.getOne(id).then(function (results) {
       res.send(results);
     }).catch(function (err) {
