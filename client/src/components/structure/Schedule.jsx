@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Input from './Input';
+import { Link } from 'react-router-dom';
 import * as apptService from '../../services/appointments';
-
-class ApptEdit extends Component {
+class Schedule extends Component {
 
     constructor(props) {
         super(props);
@@ -31,7 +30,7 @@ class ApptEdit extends Component {
 
     async componentDidMount() {
         try {
-            let res = await fetch(`/api/appointments/${this.props.match.params.id}`);
+            let res = await apptService.();
             let appt = await res.json();
             let firstname = appt.firstname;
             let lastname = appt.lastname;
@@ -88,8 +87,16 @@ class ApptEdit extends Component {
     }
 
     async handleSubmit(e) {
+        e.preventDefault();
+
         try {
-            let res = await apptService.insert(this.state);
+            let res = await fetch(`api/appointments/${this.props.match.params.id}`, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(this.state)
+            });
             this.props.history.replace(`/api/appointments/${this.props.match.params.id}`);
             console.log(email, lastname, age, number, other);
 
@@ -129,12 +136,12 @@ class ApptEdit extends Component {
                         <div className="form-row">
                             <div className="form-group col-md-5">
                                 <label for="person"></label>
-                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="First Name"
-                                    onChange={e => this.setState({ firstname: e.target.value })}  />
+                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="First Name" value={this.state.firstname}
+                                    onChange={e => this.setState({ firstname: e.target.value })} />
                             </div>
                             <div className="form-group col-md-5">
                                 <label for="person"></label>
-                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="Last Name" onChange={e => this.setState({ lastname: e.target.value })} />
+                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="Last Name" value={this.state.lastname} onChange={e => this.setState({ lastname: e.target.value })} />
                             </div>
                             <div className="form-group col-md-2">
                                 <label for="age"></label>
@@ -191,7 +198,10 @@ class ApptEdit extends Component {
                         </div>
                         <div id="bookIt" className="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2.5%' }}>
                             <Link className="btn btn-outline-danger" id="saveEdit" to={`/appointments/${this.props.match.params.id}`} >cancel</Link>
-                            <button type="submit" style={{ marginLeft: '1em' }} className="btn btn-outline-success" onClick={() => this.Delete(this.props.match.params.id)}>update</button>
+                            <button type="submit" style={{ marginLeft: '1em' }} className="btn btn-outline-success" onClick={(e) => {
+                                e.preventDefault();
+                                this.Delete(this.props.match.params.id)}}>
+                                update</button>
                         </div>
 
                     </div>
@@ -201,4 +211,5 @@ class ApptEdit extends Component {
     }
 }
 
-export default ApptEdit;
+export default Schedule;
+

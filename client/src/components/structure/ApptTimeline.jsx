@@ -15,7 +15,7 @@ class ApptTimeline extends Component {
 
     async componentDidMount() {
         try {
-            let appointments = await appointmentService.all();
+            let appointments = await appointmentService.insert();
             this.setState({appts: appointments});
             // let res = await fetch('/api/appointments');
             // let appt = await res.json();
@@ -48,7 +48,7 @@ class ApptTimeline extends Component {
         return (
 
             <React.Fragment>
-                <div className="d-flex flex-wrap align-items-center justify-content-around" >
+                <div className="d-flex flex-wrap align-items-center justify-content-around" style={{marginTop: '3%'}}>
                     {this.state.appts.map((appt) => {
                         return <ApptCard firstname={appt.firstname}
                         lastname={appt.lastname}

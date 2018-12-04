@@ -94,7 +94,8 @@ class Appointments extends Component {
         return (
 
             <React.Fragment>
-                <Input 
+                
+                {/* <Input 
                     handleFirst={this.handleFirst}
                     handleLast={this.handleLast}
                     handleAge={this.handleAge}
@@ -113,9 +114,19 @@ class Appointments extends Component {
                     number={this.state.number}
                     other={this.state.other}
                     description={this.state.description}
-                    id={this.state.id} />
+                    id={this.state.id} /> */}
 
+                
+
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '11%'}}>
                 <ApptTimeline appts={this.state.appts} />
+                
+                </div>
+            
+            <div style={{marginTop: '5%', display: 'flex', justifyContent: 'center'}}>
+            <button style={{marginTop: '5%', display: 'flex', justifyContent: 'center'}} className="btn btn-outline-primary" id="saveEdit" to={`/appointments/${this.props.match.params.id}`} >New Appointment</button>
+            </div>
+                
             </React.Fragment>
 
         )
