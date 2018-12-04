@@ -13,11 +13,18 @@ router.post('/', (req, res) => {
     .catch(err => res.send(err));
 });
 
-router.get('/', (req, res) => {
-    
-    apptTable.getAll()
-    .then(results => res.send(results))
-    .catch(err => res.send(err));
+router.get('/:id?', (req, res) => {
+    let id = req.params.id;
+
+    if (id) {
+        apptTable.getOne(id)
+            .then(results => res.send(results))
+            .catch(err => res.send(err));
+    } else {
+        apptTable.getAll()
+            .then(results => res.send(results))
+            .catch(err => res.send(err));
+    }
 });
 
 export default router;

@@ -10,7 +10,7 @@ import ApptEdit from './structure/ApptEdit';
 import ApptDetails from './structure/ApptDetails';
 import ApptTimeline from './structure/ApptTimeline';
 import Home from './structure/Home';
-
+import IndividualPatient from './structure/IndividualPatient';
 
 
 class Navigation extends Component {
@@ -28,10 +28,8 @@ class Navigation extends Component {
                         <Route path="/logout" component={Logout} />
                         <PrivateRoute exact path="/appointments" component={Appointments} />
                         <Route exact path="/" component={Home} />
-                        {/* <Route exact path="/appointments" component={Appointments} /> */}
-                        {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
-
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
+                        <PrivateRoute exact path="/patient/:id" component={IndividualPatient} />
                         {/* <PrivateRoute exact path="/appointments/:id/edit" component={} /> */}
                     </Switch>
                 </Fragment>

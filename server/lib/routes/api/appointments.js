@@ -23,12 +23,22 @@ router.post('/', function (req, res) {
     return res.send(err);
   });
 });
-router.get('/', function (req, res) {
-  apptTable.getAll().then(function (results) {
-    return res.send(results);
-  }).catch(function (err) {
-    return res.send(err);
-  });
+router.get('/:id?', function (req, res) {
+  var id = req.params.id;
+
+  if (id) {
+    apptTable.getOne(id).then(function (results) {
+      return res.send(results);
+    }).catch(function (err) {
+      return res.send(err);
+    });
+  } else {
+    apptTable.getAll().then(function (results) {
+      return res.send(results);
+    }).catch(function (err) {
+      return res.send(err);
+    });
+  }
 });
 var _default = router;
 exports.default = _default;
