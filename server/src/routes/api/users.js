@@ -5,6 +5,7 @@ import { isLoggedIn, tokenMiddleware } from '../../middleware/auth.mw';
 let router = Router();
 
 let usersTable = new Table('users');
+let apptTable = new Table('appointments');
 
 router.get('/patient/:id', tokenMiddleware, isLoggedIn, (req, res, next) => {
     let id = req.params.id;
@@ -18,6 +19,11 @@ router.get('/patient/:id', tokenMiddleware, isLoggedIn, (req, res, next) => {
                     console.log(req.user.user_type);
                 })
                 .catch(err => res.sendStatus(500));
+        
+        apptTable.find(user.id) 
+            .then(results => res.send(results))
+            .catch(err => res.sendStatus(500));
+            
     } else if (id !== user.id) {
         res.send("No access.");
     }

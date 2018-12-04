@@ -6,7 +6,6 @@ class IndividualPatient extends Component {
         super(props);
 
         this.state = {
-            type: "patient",
             patient: {},
         }
     }
@@ -24,7 +23,10 @@ class IndividualPatient extends Component {
 
     render() {
         return (
-            <h1>Patient: {this.state.patient.first_name} {this.state.patient.last_name}</h1>
+            <div>
+                <h1>Patient: {this.state.patient.first_name} {this.state.patient.last_name}</h1>
+                <h5>Appointments: </h5>
+            </div>
         )
     }
 }
