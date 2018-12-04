@@ -19,7 +19,7 @@ router.get('/patient/:id', tokenMiddleware, isLoggedIn, (req, res, next) => {
                 })
                 .catch(err => res.sendStatus(500));
     } else if (id !== user.id) {
-        res.send("No access");
+        res.send("No access.");
     }
     
 });
