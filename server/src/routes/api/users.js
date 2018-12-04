@@ -1,35 +1,40 @@
 import { Router } from 'express';
 import Table from '../../table';
+import { isLoggedIn, tokenMiddleware } from '../../middleware/auth.mw';
 
 let router = Router();
 
 let usersTable = new Table('users');
-let tokenTable = new Table('tokens');
 
-router.get('/patient/:id', (req, res) => {
+router.get('/patient/:id', tokenMiddleware, isLoggedIn, (req, res, next) => {
     let id = req.params.id;
+    const user = req.user;
 
-    let query = `SELECT * FROM ${usersTable} WHERE id = ${id};`;
-
-    // usersTable.find(query)
-    //  .then(results => res.send(results))
-    //  .catch(err => res.send(500));
+    //Will not work without {tokenMiddleware, isLoggedIn}
+    if (user.id === parseInt(id, 10)) {
+        usersTable.getOne(id)
+                .then(results => {
+                    res.send(results);
+                })
+                .catch(err => res.sendStatus(500));
+    } else if (id !== user.id) {
+        res.send("No access");
+    }
     
-    usersTable.getOne(id)
-        .then(results => res.send(results))
-        .catch(err => res.send(500));
-
-    
-
 });
 
-router.get('/doctor/:id', (req, res) => {
+router.get('/doctor/:id',tokenMiddleware, isLoggedIn, (req, res) => {
     let id = req.params.id;
+    const user = req.user
 
-    if(user.user_type === "doctor") {
-       usersTable.getOne(id)
-        .then(results => res.send(results))
-        .catch(err => res.send(500));
+    if (user.id === parseInt(id, 10)) {
+        usersTable.getOne(id)
+                .then(results => {
+                    res.send(results);
+                })
+                .catch(err => res.sendStatus(500));
+    } else if (id !== user.id) {
+        res.send("No access");
     }
 });
 
@@ -50,7 +55,5 @@ router.post('/createpatient', (req, res) => {
         .then(results => res.send(results))
         .catch(err => res.sendStatus(500));
 });
-
-
 
 export default router;
