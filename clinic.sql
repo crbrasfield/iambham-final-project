@@ -30,7 +30,7 @@ CREATE TABLE `appointments` (
   PRIMARY KEY (`id`),
   KEY `fk_userid` (`userid`),
   CONSTRAINT `fk_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `tokens` (
   PRIMARY KEY (`id`),
   KEY `fk_users` (`userid`),
   CONSTRAINT `fk_users` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (4,1),(5,1),(7,1),(8,1),(12,1),(2,2),(1,3),(6,4),(9,4),(10,4),(11,4),(3,6);
+INSERT INTO `tokens` VALUES (4,1),(5,1),(7,1),(8,1),(12,1),(2,2),(1,3),(6,4),(9,4),(10,4),(11,4),(13,4),(14,4),(15,4),(16,4),(3,6);
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +153,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
-  `phone` int(10) NOT NULL,
+  `phone` varchar(10) NOT NULL,
   `age` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `fk_insuranceid` (`insuranceid`),
   CONSTRAINT `fk_insuranceid` FOREIGN KEY (`insuranceid`) REFERENCES `insurances` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,14 +171,14 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Christoper','Robin',2055559898,35,'crobin@email.com','robin123','doctor',3),(2,'Shirley','Jackson',2055552121,47,'sjackson@email.com','jackson123','doctor',1),(3,'Matthew','Rice',2055557474,20,'mrice@email.com','rice123','patient',5),(4,'Cora','Ellen',2055553232,25,'cellen@email.com','ellen123','patient',2),(5,'Anna Mae','Hicks',2055551245,78,'amhicks@email.com','hicks123','patient',3),(6,'Bradford','Johnson',2055553214,32,'bjohnson@email.com','johnson123','doctor',4),(7,'Ryan','Jones',2055557777,59,'rjones@email.com','jones123','doctor',1);
+INSERT INTO `users` VALUES (1,'Christoper','Robin','2055559898',35,'crobin@email.com','robin123','doctor',3),(2,'Shirley','Jackson','2055552121',47,'sjackson@email.com','jackson123','doctor',1),(3,'Matthew','Rice','2055557474',20,'mrice@email.com','rice123','patient',5),(4,'Cora','Ellen','2055553232',25,'cellen@email.com','ellen123','patient',2),(5,'Anna Mae','Hicks','2055551245',78,'amhicks@email.com','hicks123','patient',3),(6,'Bradford','Johnson','2055553214',32,'bjohnson@email.com','johnson123','doctor',4),(7,'Ryan','Jones','2055557777',59,'rjones@email.com','jones123','doctor',1),(8,'David','Busters','2055554665',56,'dbusters@email.com','busters123','patient',3);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'clinic'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `spUserAppt` */;
+/*!50003 DROP PROCEDURE IF EXISTS `spUserAppts` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -188,10 +188,11 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spUserAppt`(userid int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spUserAppts`(userid int)
 begin 
 	select * from appointments
-    join users u on u.id = userid;
+    join users u on u.id = userid
+    where appointments.userid = userid; 
 end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -208,4 +209,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-05  9:31:40
+-- Dump completed on 2018-12-05 12:14:24

@@ -7,26 +7,16 @@ exports.default = void 0;
 
 var _express = require("express");
 
-var _table = _interopRequireDefault(require("../../table"));
+var _table = _interopRequireDefault(require("../../../table"));
 
-var _db = require("../../config/db");
+var _auth = require("../../../middleware/auth.mw");
+
+var _db = require("../../../config/db");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = (0, _express.Router)();
 var apptTable = new _table.default('appointments');
-router.post('/', function (req, res) {
-  var makeAppt = req.body;
-  var user = req.user;
-
-  if (user.user_type === 'patient') {
-    apptTable.insert(makeAppt).then(function (results) {
-      res.send(results);
-    }).catch(function (err) {
-      return res.send(err);
-    });
-  }
-});
 router.get('/:id?', function (req, res) {
   var id = req.params.id;
   var user = req.user;
@@ -49,26 +39,16 @@ router.get('/:id?', function (req, res) {
     res.sendStatus(401);
   }
 });
-router.get('/:id?', function (req, res) {
-  var id = req.params.id;
+router.post('/', _auth.tokenMiddleware, _auth.isLoggedIn, function (req, res) {
+  var makeAppt = req.body;
   var user = req.user;
 
-  if (user.user_type === 'doctor') {
-    if (id) {
-      apptTable.getOne(id).then(function (results) {
-        return res.send(results);
-      }).catch(function (err) {
-        return res.send(err);
-      });
-    } else {
-      apptTable.getAll().then(function (results) {
-        return res.send(results);
-      }).catch(function (err) {
-        return res.send(err);
-      });
-    }
-  } else {
-    res.send('Doctors only.');
+  if (user.user_type === 'patient') {
+    apptTable.insert(makeAppt).then(function (results) {
+      res.send(results);
+    }).catch(function (err) {
+      return res.send(err);
+    });
   }
 });
 router.put('/:id', function (req, res) {

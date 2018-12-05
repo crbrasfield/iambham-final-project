@@ -72,4 +72,4 @@ function sendQueryToDB(connection, sql, args = []) {
     });
 }
 
-export { row, rows, empty, executeQuery, generatePlaceholders };
+export { row, rows, empty, executeQuery, generatePlaceholders, callProcedure };
