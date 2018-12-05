@@ -15,28 +15,62 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = (0, _express.Router)();
 var apptTable = new _table.default('appointments');
-router.post('/', function (req, res) {
+router.post('/', _auth.tokenMiddleware, _auth.isLoggedIn, function (req, res) {
   var makeAppt = req.body;
-  apptTable.insert(makeAppt).then(function (results) {
-    return res.send(results);
-  }).catch(function (err) {
-    return res.send(err);
-  });
-});
-router.get('/:id?', function (req, res) {
-  var id = req.params.id;
+  var user = req.user;
 
-  if (id) {
-    apptTable.getOne(id).then(function (results) {
-      return res.send(results);
+  if (user.user_type === 'patient') {
+    apptTable.insert(makeAppt).then(function (results) {
+      res.send(results);
     }).catch(function (err) {
       return res.send(err);
     });
+  }
+});
+router.get('/:id?', function (req, res) {
+  var id = req.params.id;
+  var user = req.user;
+
+  if (user.user_type === 'doctor') {
+    if (id) {
+      apptTable.getOne(id).then(function (results) {
+        return res.send(results);
+      }).catch(function (err) {
+        return res.send(err);
+      });
+    } else {
+      apptTable.getAll().then(function (results) {
+        return res.send(results);
+      }).catch(function (err) {
+        return res.send(err);
+      });
+    }
   } else {
-    apptTable.getAll().then(function (results) {
+    res.send('Doctors only.');
+  }
+});
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var user = req.user;
+  var editAppt = req.body;
+
+  if (user.user_type === 'patient') {
+    apptTable.update(id, editAppt).then(function (results) {
       return res.send(results);
     }).catch(function (err) {
-      return res.send(err);
+      return res.sendStatus(500);
+    });
+  }
+});
+router.delete('/:id', function (req, res) {
+  var id = req.params.id;
+  var user = req.user;
+
+  if (user.user_type === 'patient') {
+    apptTable.delete(id).then(function (results) {
+      return res.send(results);
+    }).catch(function (err) {
+      return res.sendStatus(500);
     });
   }
 });

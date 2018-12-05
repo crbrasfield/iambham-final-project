@@ -27,7 +27,7 @@ router.get('/patient/:id', _auth.tokenMiddleware, _auth.isLoggedIn, function (re
       return res.sendStatus(500);
     });
   } else if (id !== user.id) {
-    res.send("No access");
+    res.send("No access.");
   }
 });
 router.get('/doctor/:id', _auth.tokenMiddleware, _auth.isLoggedIn, function (req, res) {
