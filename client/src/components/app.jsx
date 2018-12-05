@@ -13,7 +13,7 @@ import Home from './structure/Home';
 import About from './structure/About';
 import Schedule from './structure/Schedule';
 import { checkLogin } from '../services/user';
-
+import IndividualPatient from './structure/IndividualPatient';
 
 
 class Navigation extends Component {
@@ -44,13 +44,10 @@ class Navigation extends Component {
                         <PrivateRoute exact path="/appointments" component={Appointments} />
                         <Route exact path="/" component={Home} />
                         <Route exact path="/aboutInnovateHealth" component={About} />
-                        {/* <Route exact path="/appointments" component={Appointments} /> */}
-                        {/* <Route exact path="/viewappointment" component={Appointment}></Route> */}
                         <Route path="/schedule" component={Schedule} />
-
-
-                        <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
                         <PrivateRoute exact path="/appointments/:id/edit" component={ApptEdit} />
+                        <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
+                        <PrivateRoute exact path="/patient/:id" component={IndividualPatient} />
                     </Switch>
                 </Fragment>
             </Router>

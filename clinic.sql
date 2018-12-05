@@ -30,7 +30,7 @@ CREATE TABLE `appointments` (
   PRIMARY KEY (`id`),
   KEY `fk_userid` (`userid`),
   CONSTRAINT `fk_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `appointments` (
 
 LOCK TABLES `appointments` WRITE;
 /*!40000 ALTER TABLE `appointments` DISABLE KEYS */;
-INSERT INTO `appointments` VALUES (1,'First appointment','2018-11-29 16:39:20',5);
+INSERT INTO `appointments` VALUES (1,'First appointment','2018-11-29 16:39:20',5),(2,'backache, stomachache','2018-12-04 20:25:54',4),(4,'fever, headache','2018-12-04 21:36:55',3);
 /*!40000 ALTER TABLE `appointments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `tokens` (
   PRIMARY KEY (`id`),
   KEY `fk_users` (`userid`),
   CONSTRAINT `fk_users` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,7 +138,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (2,2),(1,3),(3,6);
+INSERT INTO `tokens` VALUES (4,1),(5,1),(7,1),(8,1),(12,1),(2,2),(1,3),(6,4),(9,4),(10,4),(11,4),(3,6);
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,6 +174,30 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,'Christoper','Robin',2055559898,35,'crobin@email.com','robin123','doctor',3),(2,'Shirley','Jackson',2055552121,47,'sjackson@email.com','jackson123','doctor',1),(3,'Matthew','Rice',2055557474,20,'mrice@email.com','rice123','patient',5),(4,'Cora','Ellen',2055553232,25,'cellen@email.com','ellen123','patient',2),(5,'Anna Mae','Hicks',2055551245,78,'amhicks@email.com','hicks123','patient',3),(6,'Bradford','Johnson',2055553214,32,'bjohnson@email.com','johnson123','doctor',4),(7,'Ryan','Jones',2055557777,59,'rjones@email.com','jones123','doctor',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'clinic'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `spUserAppt` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spUserAppt`(userid int)
+begin 
+	select * from appointments
+    join users u on u.id = userid;
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -184,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-30 10:09:36
+-- Dump completed on 2018-12-05  9:31:40
