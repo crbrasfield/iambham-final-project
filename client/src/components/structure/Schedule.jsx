@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Input from './Input';
 import { Link } from 'react-router-dom';
 import * as apptService from '../../services/appointments';
+
 class Schedule extends Component {
 
     constructor(props) {
@@ -30,7 +31,7 @@ class Schedule extends Component {
 
     async componentDidMount() {
         try {
-            let res = await apptService.();
+            let res = await apptService();
             let appt = await res.json();
             let firstname = appt.firstname;
             let lastname = appt.lastname;
@@ -197,11 +198,11 @@ class Schedule extends Component {
                             </div>
                         </div>
                         <div id="bookIt" className="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2.5%' }}>
-                            <Link className="btn btn-outline-danger" id="saveEdit" to={`/appointments/${this.props.match.params.id}`} >cancel</Link>
-                            <button type="submit" style={{ marginLeft: '1em' }} className="btn btn-outline-success" onClick={(e) => {
+                      
+                            <button type="submit" style={{ marginLeft: '1em' }} className="btn btn-outline-primary" onClick={(e) => {
                                 e.preventDefault();
-                                this.Delete(this.props.match.params.id)}}>
-                                update</button>
+                                this.Post(this.props.match.params.id)}
+                                }>Book Appointment</button>
                         </div>
 
                     </div>

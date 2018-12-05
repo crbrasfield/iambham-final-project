@@ -14,7 +14,7 @@ class NavBar extends Component {
                     <Link to="/" className="navbar-brand">INNOVATE HEALTH</Link>
                     <Link to="/" className="navbar-brand">Home</Link>
                     <Link to="/appointments" className="navbar-brand">Appointments</Link>
-                    <Link to="/" className="navbar-brand">Schedule</Link>
+                    <Link to="/Schedule" className="navbar-brand">Schedule</Link>
                     <Link to="/aboutInnovateHealth" className="navbar-brand">About  Us</Link>
                     <AuthButton />
                 </div>

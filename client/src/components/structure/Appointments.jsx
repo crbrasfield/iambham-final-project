@@ -118,7 +118,7 @@ class Appointments extends Component {
 
                 
 
-                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '11%'}}>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '7%'}}>
                 <ApptTimeline appts={this.state.appts} />
                 
                 </div>
