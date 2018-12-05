@@ -3,7 +3,8 @@ import React from 'react';
 const Input = props => {
     return (
         <React.Fragment>
-            <form style={{ display: 'flex', justifyItems: 'center' }}>
+            <br/><br/>
+            <form style={{ display: 'flex', justifyItems: 'center', marginTop: '3%' }}>
                 <div>
 
                     <div className="form-row">

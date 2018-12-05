@@ -10,27 +10,44 @@ import ApptEdit from './structure/ApptEdit';
 import ApptDetails from './structure/ApptDetails';
 import ApptTimeline from './structure/ApptTimeline';
 import Home from './structure/Home';
+import About from './structure/About';
+import Schedule from './structure/Schedule';
+import { checkLogin } from '../services/user';
 import IndividualPatient from './structure/IndividualPatient';
 
 
 class Navigation extends Component {
 
+    state = {
+        ready: false
+    }
+
+    componentWillMount() {
+        checkLogin()
+        .then(() => {
+            this.setState({ ready: true })
+        })
+    }
+
     render() {
+        if (!this.state.ready) {
+            return null;
+        }
+
         return (
             <Router>
                 <Fragment>
                 <NavBar /> 
-                    <Link to="/">Home</Link>
-                    <Link to="/appointments">Appointments</Link>
-                    <AuthButton />
                     <Switch>
                         <Route path="/login" component={Login} />
                         <Route path="/logout" component={Logout} />
                         <PrivateRoute exact path="/appointments" component={Appointments} />
                         <Route exact path="/" component={Home} />
+                        <Route exact path="/aboutInnovateHealth" component={About} />
+                        <Route path="/schedule" component={Schedule} />
+                        <PrivateRoute exact path="/appointments/:id/edit" component={ApptEdit} />
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
                         <PrivateRoute exact path="/patient/:id" component={IndividualPatient} />
-                        {/* <PrivateRoute exact path="/appointments/:id/edit" component={} /> */}
                     </Switch>
                 </Fragment>
             </Router>

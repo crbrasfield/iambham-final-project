@@ -79,7 +79,7 @@ render() {
            */}
 
 
-                        <div id="DeleteIt" className="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '0px' }}>
+                        <div id="DeleteIt" className="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '3%' }}>
                                 <button type="submit" style={{marginRight: '1em'}} className="btn btn-outline-danger" onClick={() => this.delete(this.props.match.params.id)} >Delete</button>
                                 <Link className="btn btn-outline-success" to={`/appointments/${this.props.match.params.id}/edit`}>
                                     Edit
