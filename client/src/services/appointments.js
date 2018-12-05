@@ -1,7 +1,7 @@
 import * as baseService from './base';
 
 function all() {
-  return baseService.get("/api/appointments");
+  return baseService.get(`/api/appointments`);
 }
 
 function one(id) {

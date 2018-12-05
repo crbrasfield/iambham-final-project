@@ -8,6 +8,7 @@ exports.rows = rows;
 exports.empty = empty;
 exports.executeQuery = executeQuery;
 exports.generatePlaceholders = generatePlaceholders;
+exports.callProcedure = callProcedure;
 
 var _mysql = _interopRequireDefault(require("mysql"));
 
@@ -61,8 +62,7 @@ function _executeQuery() {
 function callProcedure(procedureName) {
   var args = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
   var placeholders = generatePlaceholders(args);
-  var callString = "CALL ".concat(procedureName, "(").concat(placeholders, ");"); // CALL GetChirps();, or CALL InsertChirp(?,?,?);
-
+  var callString = "CALL ".concat(procedureName, "(").concat(placeholders, ");");
   return executeQuery(callString, args);
 }
 
