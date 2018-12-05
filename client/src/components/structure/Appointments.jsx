@@ -30,6 +30,12 @@ class Appointments extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    async componentDidMount() {
+        let appointments = await appointmentService.all();
+        this.setState({appointments});
+        console.log(this.state.appointments);
+    }
+
 
     handleFirst(e) {
         // console.log(e.target.value);
@@ -83,9 +89,7 @@ class Appointments extends Component {
             //     body: JSON.stringify(this.state)
             // }
             );
-            let appointments = await appointmentService.all();
-            this.setState(appointments);
-            console.log(this.state.appointments);
+
             //this.props.history.replace('/');
         } catch (err) { }
     }
@@ -119,7 +123,7 @@ class Appointments extends Component {
                 
 
                 <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '7%'}}>
-                <ApptTimeline appts={this.state.appts} />
+                <ApptTimeline appts={this.state.appointments} />
                 
                 </div>
             

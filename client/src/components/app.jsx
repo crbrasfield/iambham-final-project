@@ -12,12 +12,28 @@ import ApptTimeline from './structure/ApptTimeline';
 import Home from './structure/Home';
 import About from './structure/About';
 import Schedule from './structure/Schedule';
+import { checkLogin } from '../services/user';
 
 
 
 class Navigation extends Component {
 
+    state = {
+        ready: false
+    }
+
+    componentWillMount() {
+        checkLogin()
+        .then(() => {
+            this.setState({ ready: true })
+        })
+    }
+
     render() {
+        if (!this.state.ready) {
+            return null;
+        }
+
         return (
             <Router>
                 <Fragment>

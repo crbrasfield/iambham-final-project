@@ -8,6 +8,7 @@ class Schedule extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            appt: {},
 
             firstname: '',
             lastname: '',
@@ -30,19 +31,27 @@ class Schedule extends Component {
     }
 
     async componentDidMount() {
+       
         try {
-            let res = await apptService();
+            let res = await fetch('/api/appointments');
             let appt = await res.json();
-            let firstname = appt.firstname;
-            let lastname = appt.lastname;
-            let age = appt.age;
-            let email = appt.email;
-            let password = appt.password;
-            let number = appt.number;
-            let other = appt.other;
-            let description = appt.description;
-            this.setState({ firstname: firstname, lastname: lastname, age: age, email: email, password: password, number: number, other: other, description: description });
-        } catch (e) { }
+            this.setState(appt);
+        } catch (e) { console.log(`you've got an error ${e}`); }
+       
+       
+        // try {
+        //     let res = await apptService();
+        //     let appt = await res.json();
+        //     let firstname = appt.firstname;
+        //     let lastname = appt.lastname;
+        //     let age = appt.age;
+        //     let email = appt.email;
+        //     let password = appt.password;
+        //     let number = appt.number;
+        //     let other = appt.other;
+        //     let description = appt.description;
+        //     this.setState({ firstname: firstname, lastname: lastname, age: age, email: email, password: password, number: number, other: other, description: description });
+        // } catch (e) { }
     }
 
     handleFirst(e) {
@@ -90,19 +99,35 @@ class Schedule extends Component {
     async handleSubmit(e) {
         e.preventDefault();
 
+
         try {
-            let res = await fetch(`api/appointments/${this.props.match.params.id}`, {
-                method: 'PUT',
+            let res = await fetch(`api/appointments/`, {
+                method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(this.state)
             });
-            this.props.history.replace(`/api/appointments/${this.props.match.params.id}`);
+            this.props.history.replace('/');
             console.log(email, lastname, age, number, other);
 
         }
         catch (err) { console.log(`You've got yourself an error there : ${err}`) }
+
+        
+        // try {
+        //     let res = await fetch(`api/appointments/${this.props.match.params.id}`, {
+        //         method: 'PUT',
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify(this.state)
+        //     });
+        //     this.props.history.replace(`/api/appointments/${this.props.match.params.id}`);
+        //     console.log(email, lastname, age, number, other);
+
+        // }
+        // catch (err) { console.log(`You've got yourself an error there : ${err}`) }
     }
 
     render() {
@@ -131,7 +156,7 @@ class Schedule extends Component {
                     id={this.state.id}
                 /> */}
 
-                <form action="/appointments" method="GET" style={{ display: 'flex', marginTop: '3%', justifyItems: 'center' }}>
+                <form action="/appointments" method="GET" style={{ display: 'flex', marginTop: '5%', justifyContent: 'center' }}>
                     <div>
 
                         <div className="form-row">
@@ -150,20 +175,20 @@ class Schedule extends Component {
                             </div>
                         </div>
 
-                        <div className="form-row">
-                            <div className="form-group col-md-5">
+                        {/* <div className="form-row"> */}
+                            {/* <div className="form-group col-md-5">
                                 <label for="email"></label>
                                 <input type="email" className="form-control" aria-describedby="textHelp" placeholder="Email" onChange={e => this.setState({ email: e.target.value })} />
-                            </div>
-                            <div className="form-group col-md-4">
+                            </div> */}
+                            {/* <div className="form-group col-md-4">
                                 <label for="exampleInputPassword1"></label>
                                 <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={e => this.setState({ password: e.target.value })} />
-                            </div>
-                            <div className="form-group col-md-3">
+                            </div> */}
+                            {/* <div className="form-group col-md-3">
                                 <label for="number"></label>
                                 <input type="number" className="form-control" aria-describedby="textHelp" maxLength="10" placeholder="Phone Number" onChange={e => this.setState({ number: e.target.value })} />
-                            </div>
-                        </div>
+                            </div> */}
+                        {/* </div> */}
 
                         <div className="form-row">
                             <div className="col-md-3">
@@ -201,7 +226,8 @@ class Schedule extends Component {
                       
                             <button type="submit" style={{ marginLeft: '1em' }} className="btn btn-outline-primary" onClick={(e) => {
                                 e.preventDefault();
-                                this.Post(this.props.match.params.id)}
+                                this.handleSubmit(e)}
+                                // this.Post(this.props.match.params.id)}
                                 }>Book Appointment</button>
                         </div>
 
@@ -213,4 +239,3 @@ class Schedule extends Component {
 }
 
 export default Schedule;
-

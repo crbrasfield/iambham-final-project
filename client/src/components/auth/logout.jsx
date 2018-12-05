@@ -7,22 +7,15 @@ class Logout extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            loggedOut: false
-        };
     }
 
     componentDidMount() {
         userService.logout();
-        this.setState({ loggedOut: true });
+        location.replace('/login')
     }
 
     render() {
-        if (this.state.loggedOut) {
-            return <Redirect to="/" />;
-        } else {
-            return <IndeterminateProgress message="Logging Out..." />
-        }
+        return null;
     }
 }
 
