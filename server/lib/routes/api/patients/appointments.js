@@ -30,7 +30,7 @@ router.get('/:id?', function (req, res) {
       });
     } else {
       (0, _db.callProcedure)('spUserAppts', [user.id]).then(function (results) {
-        return res.send(results);
+        return res.send(results[0]);
       }).catch(function (err) {
         return res.send(err);
       });

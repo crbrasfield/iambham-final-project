@@ -18,14 +18,15 @@ class IndividualPatient extends Component {
             let patient = await patientService.one(id);
             let apptArr = await apptService.all();
 
-            let appointments = apptArr[0].map(appt => {
+            let appointments = apptArr.map(appt => {
                 return {
                     id: appt.id,
-                    description: appt.description,
-                    date: appt.date
+                    description: appt.description
                 }
-            } )
+            });
+
             this.setState({ patient, appointments });
+            console.table(this.state.appointments);
         } catch (err) {
             console.error(err);
         }
@@ -33,12 +34,16 @@ class IndividualPatient extends Component {
 
     render() {
         return (
-            <div>
+            <div style={style}>
                 <h1>Patient: {this.state.patient.first_name} {this.state.patient.last_name}</h1>
-                <h5>Appointments:  </h5>
+                <h5>Appointments: {this.state.appointments.description} </h5>
+                
             </div>
         )
     }
 }
 
+const style = {
+    marginTop: "7%"
+}
 export default IndividualPatient;
