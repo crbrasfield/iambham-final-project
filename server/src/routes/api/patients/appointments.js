@@ -17,7 +17,7 @@ router.get('/:id?', (req, res) => {
                 .catch(err => res.send(err));
         } else {
             callProcedure('spUserAppts', [user.id])
-                .then(results => res.send(results))
+                .then(results => res.send(results[0]))
                 .catch(err => res.send(err));
         }
     } else {

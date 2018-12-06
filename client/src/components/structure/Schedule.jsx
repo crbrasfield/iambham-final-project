@@ -36,7 +36,7 @@ class Schedule extends Component {
             let res = await fetch('/api/appointments');
             let appt = await res.json();
             this.setState(appt);
-        } catch (e) { console.log(`you've got an error ${e}`); }
+        } catch (e) { console.error(`you've got an error ${e}`); }
        
        
         // try {

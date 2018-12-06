@@ -15,7 +15,7 @@ router.get(router.get('/:id?', (req, res) => {
                 .catch(err => res.send(err));
         } else {
             apptTable.getAll()
-                .then(results => res.send(results))
+                .then(results => res.send(results[0]))
                 .catch(err => res.send(err));
         }
     } else {

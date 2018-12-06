@@ -40,20 +40,12 @@ router.get('/:id?', function (req, res) {
       });
     } else {
       (0, _db.callProcedure)('spUserAppts', [user.id]).then(function (results) {
-        return res.send(results);
+        return res.send(results[0]);
       }).catch(function (err) {
         return res.send(err);
       });
     }
-  } else {
-    res.sendStatus(401);
-  }
-});
-router.get('/:id?', function (req, res) {
-  var id = req.params.id;
-  var user = req.user;
-
-  if (user.user_type === 'doctor') {
+  } else if (user.user_type === "doctor") {
     if (id) {
       apptTable.getOne(id).then(function (results) {
         return res.send(results);
@@ -67,9 +59,15 @@ router.get('/:id?', function (req, res) {
         return res.send(err);
       });
     }
-  } else {
-    res.send('Doctors only.');
   }
+});
+router.get('/doctorappointments', function (req, res) {
+  var user = req.user;
+  (0, _db.callProcedure)('spDocAppts', [user.id]).then(function (results) {
+    return res.send(results[0]);
+  }).catch(function (err) {
+    return res.send(err);
+  });
 });
 router.put('/:id', function (req, res) {
   var id = req.params.id;

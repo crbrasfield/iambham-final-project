@@ -26,19 +26,10 @@ router.get('/:id?', (req, res) => {
                 .catch(err => res.send(err));
         } else {
             callProcedure('spUserAppts', [user.id])
-                .then(results => res.send(results))
+                .then(results => res.send(results[0]))
                 .catch(err => res.send(err));
         }
-    } else {
-        res.sendStatus(401)
-    }
-});
-
-router.get('/:id?', (req, res) => {
-    let id = req.params.id;
-    const user = req.user;
-
-    if(user.user_type === 'doctor') {
+    } else if (user.user_type === "doctor") {
         if (id) {
             apptTable.getOne(id)
                 .then(results => res.send(results))
@@ -48,9 +39,15 @@ router.get('/:id?', (req, res) => {
                 .then(results => res.send(results))
                 .catch(err => res.send(err));
         }
-    } else {
-        res.send('Doctors only.')
     }
+});
+
+router.get('/doctorappointments',(req, res) => {
+    const user = req.user;
+
+    callProcedure('spDocAppts', [user.id])
+        .then(results => res.send(results[0]))
+        .catch(err => res.send(err));
 });
 
 router.put('/:id', (req, res) => {

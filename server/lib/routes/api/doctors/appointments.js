@@ -26,7 +26,7 @@ router.get(router.get('/:id?', function (req, res) {
       });
     } else {
       apptTable.getAll().then(function (results) {
-        return res.send(results);
+        return res.send(results[0]);
       }).catch(function (err) {
         return res.send(err);
       });
