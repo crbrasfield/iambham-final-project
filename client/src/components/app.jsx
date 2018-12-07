@@ -14,6 +14,7 @@ import About from "./structure/About";
 import Schedule from "./structure/Schedule";
 import { checkLogin, isLoggedIn } from "../services/user";
 import IndividualPatient from "./structure/IndividualPatient";
+import IndividualDoctor from "./structure/IndividualDoctor";
 import doctorLogin from "./auth/doctorLogin";
 import patientLogin from "./auth/patientLogin";
 import Footer from "./structure/Footer";
@@ -67,7 +68,11 @@ class Navigation extends Component {
                 path="/patient/:id"
                 component={IndividualPatient}
               />
-              {/* <Route exact path="/footer" component={Footer} /> */}
+              <PrivateRoute
+                exact
+                path="/doctor/:id"
+                component={IndividualDoctor}
+              />
             </Switch>
           </div>
           <Footer />
