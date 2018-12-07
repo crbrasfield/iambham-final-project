@@ -61,7 +61,7 @@ class Login extends Component {
 
        return ( 
         <Fragment>
-           <div class="alert alert-warning" style={alertStyle} role="alert">
+           <div className="alert alert-warning" style={alertStyle} role="alert">
              You must be logged in to view this page.
            </div>
            <div style={addBlogFormStyle}>
@@ -87,6 +87,7 @@ class Login extends Component {
 
 const alertStyle = {
     padding: "20px",
+    marginTop: "7%"
 };
 
 const addBlogFormStyle = {

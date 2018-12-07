@@ -192,7 +192,7 @@ class Schedule extends Component {
 
                         <div className="form-row">
                             <div className="col-md-3">
-                                <select class="custom-select custom-select-md mb-3">
+                                <select className="custom-select custom-select-md mb-3">
                                     <option selected>Gender</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
@@ -200,7 +200,7 @@ class Schedule extends Component {
                             </div>
 
                             <div className="col-md-5">
-                                <select class="custom-select" size="2">
+                                <select className="custom-select" size="2">
                                     <option selected>Insurance</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
