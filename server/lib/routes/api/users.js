@@ -15,6 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = (0, _express.Router)();
 var usersTable = new _table.default('users');
+var apptTable = new _table.default('appointments');
 router.get('/patient/:id', _auth.tokenMiddleware, _auth.isLoggedIn, function (req, res, next) {
   var id = req.params.id;
   var user = req.user; //Will not work without {tokenMiddleware, isLoggedIn}
@@ -23,6 +24,11 @@ router.get('/patient/:id', _auth.tokenMiddleware, _auth.isLoggedIn, function (re
     usersTable.getOne(id).then(function (results) {
       res.send(results);
       console.log(req.user.user_type);
+    }).catch(function (err) {
+      return res.sendStatus(500);
+    });
+    apptTable.find(user.id).then(function (results) {
+      return res.send(results);
     }).catch(function (err) {
       return res.sendStatus(500);
     });

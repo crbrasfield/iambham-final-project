@@ -11,7 +11,7 @@ class Logout extends Component {
 
     componentDidMount() {
         userService.logout();
-        location.replace('/login')
+        location.replace('/')
     }
 
     render() {
