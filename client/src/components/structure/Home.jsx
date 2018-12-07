@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import * as appointmentService from '../../services/appointments';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
+import PatientAuth from '../auth/patientAuth';
+import DoctorAuth from '../auth/doctorAuth';
 
 class Home extends Component {
     constructor(props) {
@@ -39,6 +41,17 @@ class Home extends Component {
 
 
                         </div>
+
+                        <div style={{ display: 'flex', justifyContent: 'center', position: 'relative', marginTop: '11%' }}>
+                            <div style={{ position: 'absolute', right: '5.5%', bottom: '0%', zIndex: '2'}}>
+                                <PatientAuth />
+                            </div>
+                            <div >
+                                <DoctorAuth />
+                            </div>
+                        </div>
+
+
 
                     </div>
 

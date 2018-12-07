@@ -14,6 +14,9 @@ import About from './structure/About';
 import Schedule from './structure/Schedule';
 import { checkLogin } from '../services/user';
 import IndividualPatient from './structure/IndividualPatient';
+import doctorLogin from './auth/doctorLogin';
+import patientLogin from './auth/patientLogin';
+import Footer from './structure/Footer';
 
 
 class Navigation extends Component {
@@ -40,15 +43,19 @@ class Navigation extends Component {
                 <NavBar /> 
                     <Switch>
                         <Route path="/login" component={Login} />
-                        <Route path="/logout" component={Logout} />
-                        <PrivateRoute exact path="/appointments" component={Appointments} />
+                        <Route exact path="/patientLogin" component={patientLogin} />
+                        <Route exact path="/doctorLogin" component={doctorLogin} />
+                        <Route exact path="/logout" component={Logout} />
                         <Route exact path="/" component={Home} />
                         <Route exact path="/aboutInnovateHealth" component={About} />
-                        <Route path="/schedule" component={Schedule} />
+                        <PrivateRoute exact path="/schedule" component={Schedule} />
+                        <PrivateRoute exact path="/appointments" component={Appointments} />
                         <PrivateRoute exact path="/appointments/:id/edit" component={ApptEdit} />
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
                         <PrivateRoute exact path="/patient/:id" component={IndividualPatient} />
+                        {/* <Route exact path="/footer" component={Footer} /> */}
                     </Switch>
+                    <Footer/>
                 </Fragment>
             </Router>
         )
