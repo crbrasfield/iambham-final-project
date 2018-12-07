@@ -1,13 +1,14 @@
 import React from 'react';
+import docGif from './images/doc2.gif';
 
 const About = () => {
     return (
-        <React.Fragment>
+        <div style={{width: '100vw', padding: '0%' }}>
             <div style={{marginTop: '4.7%'}}></div>
 
             <div style={{backgroundColor: '#C49BED', maxHeight: '88%'}}>
                 <div style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
-                    <img src="https://media.discordapp.net/attachments/443435317005910048/519584828526690344/doc.gif?width=789&height=592" alt="doctor purple"/>
+                    <img src={docGif} alt="doctor purple"/>
 
                     <h1 style={{ color: 'white', marginRight: '3%', marginLeft: '3%', marginTop: '2%', marginBottom: '2%'}}>
                     Established to help connect people to physicians, Innovate Health is dedicated to providing quality compassionate care for our patients and their families.
@@ -38,7 +39,7 @@ const About = () => {
 
                 </div>
             </div>
-        </React.Fragment>
+        </div>
     )
 }
 

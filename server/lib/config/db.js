@@ -8,6 +8,7 @@ exports.rows = rows;
 exports.empty = empty;
 exports.executeQuery = executeQuery;
 exports.generatePlaceholders = generatePlaceholders;
+exports.callProcedure = callProcedure;
 
 var _mysql = _interopRequireDefault(require("mysql"));
 
