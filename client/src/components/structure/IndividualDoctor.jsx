@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import * as patientService from '../../services/patients';
+import * as doctorService from '../../services/doctors';
 import * as apptService from '../../services/appointments';
 
-class IndividualPatient extends Component {
+class IndividualDoctor extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            patient: {},
+            doctor: {},
             appointments: {},
         }
     }
@@ -15,7 +15,7 @@ class IndividualPatient extends Component {
     async componentDidMount() {
         try {
             let id = this.props.match.params.id;
-            let patient = await patientService.one(id);
+            let doctor = await doctorService.one(id);
             let apptArr = await apptService.all();
 
             let appointments = apptArr.map(appt => {
@@ -25,8 +25,8 @@ class IndividualPatient extends Component {
                 }
             });
 
-            this.setState({ patient, appointments });
-            console.table(this.state.appointments);
+            this.setState({ doctor, appointments });
+            console.table(this.state.doctor);
         } catch (err) {
             console.error(err);
         }
@@ -35,7 +35,7 @@ class IndividualPatient extends Component {
     render() {
         return (
             <div style={style}>
-                <h1>Patient: {this.state.patient.first_name} {this.state.patient.last_name}</h1>
+                <h1>Doctor: {this.state.doctor.first_name} {this.state.doctor.last_name}</h1>
                 <h5>Appointments:  </h5>
                 
             </div>
@@ -46,4 +46,4 @@ class IndividualPatient extends Component {
 const style = {
     marginTop: "7%"
 }
-export default IndividualPatient;
+export default IndividualDoctor;
