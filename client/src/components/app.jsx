@@ -14,7 +14,7 @@ import About from './structure/About';
 import Schedule from './structure/Schedule';
 import { checkLogin } from '../services/user';
 import IndividualPatient from './structure/IndividualPatient';
-
+import IndividualDoctor from './structure/IndividualDoctor';
 
 class Navigation extends Component {
 
@@ -48,6 +48,7 @@ class Navigation extends Component {
                         <PrivateRoute exact path="/appointments/:id/edit" component={ApptEdit} />
                         <PrivateRoute exact path="/appointments/:id" component={ApptDetails} />
                         <PrivateRoute exact path="/patient/:id" component={IndividualPatient} />
+                        <PrivateRoute exact path="/doctor/:id" component={IndividualDoctor} />
                     </Switch>
                 </Fragment>
             </Router>
