@@ -30,7 +30,7 @@ class doctorLogin extends Component {
     userService
       .login(this.state.email, this.state.password)
       .then(() => {
-        window.location.replace("/");
+        window.location.replace("/appointments");
       })
       .catch(err => {
         if (err.message) {
@@ -59,7 +59,6 @@ class doctorLogin extends Component {
     }
 
     return (
-
       <div
         className="container"
         style={{
