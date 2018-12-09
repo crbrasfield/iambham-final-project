@@ -17,11 +17,13 @@ import IndividualPatient from "./structure/IndividualPatient";
 import IndividualDoctor from "./structure/IndividualDoctor";
 import doctorLogin from "./auth/doctorLogin";
 import patientLogin from "./auth/patientLogin";
+import Profile from "./structure/profile";
 import Footer from "./structure/Footer";
 
 class Navigation extends Component {
   state = {
-    ready: false
+    ready: false,
+    user: {}
   };
 
   componentWillMount() {
@@ -47,6 +49,7 @@ class Navigation extends Component {
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/" component={Home} />
               <Route exact path="/aboutInnovateHealth" component={About} />
+              <PrivateRoute exact path="/profile" component={Profile} />
               <PrivateRoute exact path="/schedule" component={Schedule} />
               <PrivateRoute
                 exact

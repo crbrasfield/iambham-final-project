@@ -29,8 +29,8 @@ class patientLogin extends Component {
     e.preventDefault();
     userService
       .login(this.state.email, this.state.password)
-      .then(() => {
-        window.location.replace("/");
+      .then(res => {
+        window.location.replace("/appointments");
       })
       .catch(err => {
         if (err.message) {
