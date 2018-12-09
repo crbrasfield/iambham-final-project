@@ -5,7 +5,7 @@ import { currentUser } from "../../services/user";
 
 class NavBar extends Component {
   state = {
-    user: null
+    user: {}
   };
 
   componentDidMount() {
@@ -24,7 +24,9 @@ class NavBar extends Component {
           </Link>
           {this.props.isLoggedIn && (
             <Link to="/appointments" className="navbar-brand">
-              Appointments
+              {this.state.user.user_type === "patient"
+                ? "My Appointments"
+                : "Appointments"}
             </Link>
           )}
           {this.props.isLoggedIn && (

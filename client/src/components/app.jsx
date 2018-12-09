@@ -6,6 +6,7 @@ import Logout from "./auth/logout";
 import AuthButton from "./auth/authButton";
 import NavBar from "./structure/NavBar";
 import Appointments from "./structure/Appointments";
+import NewAppointment from "./structure/NewAppointment";
 import ApptEdit from "./structure/ApptEdit";
 import ApptDetails from "./structure/ApptDetails";
 import ApptTimeline from "./structure/ApptTimeline";
@@ -55,6 +56,11 @@ class Navigation extends Component {
                 exact
                 path="/appointments"
                 component={Appointments}
+              />
+              <PrivateRoute
+                exact
+                path="/appointments/new"
+                component={NewAppointment}
               />
               <PrivateRoute
                 exact
