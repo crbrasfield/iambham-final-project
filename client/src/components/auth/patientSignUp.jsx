@@ -58,7 +58,7 @@ class PatientSignUp extends Component {
         console.log(this.state);
 
         try {
-            let newPatient = await fetch('api/createpatient', {
+            let newPatient = await fetch('api/new/createpatient', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"

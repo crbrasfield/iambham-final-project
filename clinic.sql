@@ -21,17 +21,17 @@
 
 DROP TABLE IF EXISTS `appointments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `appointments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userid` int(11) NOT NULL,
-  `doctorid` int(11) NOT NULL,
+  `doctorid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userid` (`userid`),
   CONSTRAINT `fk_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `appointmentsymptoms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `appointmentsymptoms` (
   `appointmentid` int(11) NOT NULL,
   `symptomid` int(11) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `appointmentsymptoms` (
   KEY `fk_symptomid` (`symptomid`),
   CONSTRAINT `fk_appointmentid` FOREIGN KEY (`appointmentid`) REFERENCES `appointments` (`id`),
   CONSTRAINT `fk_symptomid` FOREIGN KEY (`symptomid`) REFERENCES `symptoms` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,12 +76,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `insurances`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `insurances` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,12 +100,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `symptoms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `symptoms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,14 +123,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `tokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_users` (`userid`),
   CONSTRAINT `fk_users` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (4,1),(5,1),(7,1),(8,1),(12,1),(17,1),(19,1),(2,2),(18,2),(1,3),(6,4),(9,4),(10,4),(11,4),(13,4),(14,4),(15,4),(16,4),(3,6);
+INSERT INTO `tokens` VALUES (4,1),(5,1),(7,1),(8,1),(12,1),(17,1),(19,1),(21,1),(23,1),(2,2),(18,2),(1,3),(6,4),(9,4),(10,4),(11,4),(13,4),(14,4),(15,4),(16,4),(20,4),(22,4),(24,4),(3,6);
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(30) NOT NULL,
@@ -163,7 +163,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `fk_insuranceid` (`insuranceid`),
   CONSTRAINT `fk_insuranceid` FOREIGN KEY (`insuranceid`) REFERENCES `insurances` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,17 +183,16 @@ UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spDocAppts`(doctorid int)
 begin
-	select * from appointments a
-    join users on a.userid = users.id
-    where a.doctorid = doctorid;
+	select *, appointments.id as appointment_id from appointments 
+    join users on appointments.userid = users.id
+    where appointments.doctorid = doctorid;
     
 end ;;
 DELIMITER ;
@@ -205,15 +204,14 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spUserAppts`(userid int)
 begin 
-	select * from appointments
+	select *, appointments.id as appointment_id from appointments
     join users u on u.id = userid
     where appointments.userid = userid; 
 end ;;
@@ -232,11 +230,3 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spUserAppts`(userid int)
-begin 
-    select *, appointments.id as appointment_id from appointments
-    join users u on u.id = userid
-    where appointments.userid = userid; 
-end
-
--- Dump completed on 2018-12-06 12:19:10

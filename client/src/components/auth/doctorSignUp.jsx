@@ -8,13 +8,14 @@ class DoctorSignUp extends Component {
         super(props);
 
         this.state = {
-            newDoctor: {},
+            // newDoctor: {},
 
-            firstname: '',
-            lastname: '',
+            first_name: '',
+            last_name: '',
             number: '',
             email: '',
             password: '',
+            age: ''
 
 
         }
@@ -24,17 +25,18 @@ class DoctorSignUp extends Component {
         this.handleNumber = this.handleNumber.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.handleAge = this.handleAge.bind(this);
 
     }
 
     handleFirst(e) {
         // console.log(e.target.value);
-        this.setState({ firstname: e.target.value });
+        this.setState({ first_name: e.target.value });
     }
 
     handleLast(e) {
         // console.log(e.target.value);
-        this.setState({ lastname: e.target.value });
+        this.setState({ last_name: e.target.value });
     }
 
 
@@ -53,16 +55,19 @@ class DoctorSignUp extends Component {
         this.setState({ number: e.target.value });
     }
 
+    handleAge(e) {
+        this.setState({ age: e.target.value })
+    }
     async handleCreateDoctor() {
         try {
-            let newDoctor = await fetch('api/createdoctor', {
+            let newDoctor = await fetch('api/new/createdoctor', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(this.state)
             });
-            this.setState({ newDoctor });
+            // this.setState({ newDoctor });
         } catch (err) {
             console.error(err);
         }
@@ -91,21 +96,28 @@ class DoctorSignUp extends Component {
             <div>
                 <div className="form-row" style={{display: 'flex', justifyContent: 'center'}}>
 
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-3">
                         <label for="person"></label>
-                        <input type="text" className="form-control" value={this.state.firstname} onChange={this.handleFirst} aria-describedby="textHelp" placeholder="Enter First Name"
-                            // onChange={e => this.setState({ firstname: e.target.value })}
+                        <input type="text" className="form-control" value={this.state.first_name} onChange={this.handleFirst} aria-describedby="textHelp" placeholder="Enter First Name"
+                            // onChange={e => this.setState({ first_name: e.target.value })}
                              />
                     </div>
 
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-3">
                         <label for="person"></label>
-                        <input type="text" className="form-control" value={this.state.lastname} onChange={this.handleLast} aria-describedby="textHelp" placeholder="Enter Last Name" 
-                        // onChange={e => this.setState({ lastname: e.target.value })} 
+                        <input type="text" className="form-control" value={this.state.last_name} onChange={this.handleLast} aria-describedby="textHelp" placeholder="Enter Last Name" 
+                        // onChange={e => this.setState({ last_name: e.target.value })} 
                         />
                     </div>
                     
-                    <div className="form-group col-md-4">
+                    <div className="form-group col-md-3">
+                        <label for="person"></label>
+                        <input type="text" className="form-control" value={this.state.age} onChange={this.handleAge} aria-describedby="textHelp" placeholder="Enter Age" 
+                        // onChange={e => this.setState({ last_name: e.target.value })} 
+                        />
+                    </div>
+
+                    <div className="form-group col-md-3">
                         <label for="number"></label>
                         <input type="number" className="form-control" value={this.state.number} onChange={this.handleNumber} aria-describedby="textHelp" maxLength="10" placeholder="Phone Number"
                         // onChange={e => this.setState({ number: e.target.value })}

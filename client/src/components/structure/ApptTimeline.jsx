@@ -21,7 +21,7 @@ class ApptTimeline extends Component {
   render() {
     return (
       <div>
-        <div class="accordion" id="accordionExample">
+        <div className="accordion" id="accordionExample">
           <div style={{ display: "flex", flexDirection: "column" }}>
             {this.state.appts.map(appt => {
               return (

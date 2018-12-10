@@ -83,18 +83,18 @@ class Appointments extends Component {
           )}
           <div className="card" style={{ margin: "5px" }}>
             <div
-              class="card-header"
+              className="card-header"
               style={{
                 display: "flex"
               }}
             >
-              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
                 Date
               </h5>
-              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
                 Description
               </h5>
-              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
                 Doctor
               </h5>
             </div>

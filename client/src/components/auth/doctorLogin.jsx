@@ -69,7 +69,7 @@ class doctorLogin extends Component {
         }}
       >
         <form onSubmit={this.login}>
-          <div class="form-group">
+          <div className="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input
               placeholder="Email"
@@ -80,7 +80,7 @@ class doctorLogin extends Component {
               required
             />
           </div>
-          <div class="form-group">
+          <div className="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input
               placeholder="Password"
@@ -94,7 +94,7 @@ class doctorLogin extends Component {
           {this.state.feedbackMessage ? (
             <p>{this.state.feedbackMessage}</p>
           ) : null}
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Login
           </button>
           <DoctorSignUp />
