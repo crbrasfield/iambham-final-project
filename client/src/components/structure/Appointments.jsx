@@ -6,21 +6,21 @@ import Input from "./Input";
 import * as appointmentService from "../../services/appointments";
 import { currentUser } from "../../services/user";
 import ApptCard from "./ApptCard";
+import DoctorAppts from "./DoctorAppts";
 
 class Appointments extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      lastname: '',
 
+    this.state = {
       user: {},
-      myDocAppointments: [],
       appointments: [],
-      appointmentWasCreated: false, 
-      appointmentWasCanceled: false,
-      docApptLoaded: false
+      myDocAppointments: [],
+      appointmentWasCreated: false,
+      appointmentWasCanceled: false
     };
-    this.handleLast = this.handleLast.bind(this);
+
+    this.handleDocAppt = this.handleDocAppt.bind(this);
   }
 
   handleLast(e) {
@@ -36,19 +36,19 @@ class Appointments extends Component {
   async loadState() {
     let user = await currentUser();
     let appointments = await appointmentService.all();
-    let myDocAppointments = appointments.filter(appt => {
+    let myDocAppointments = this.state.appointments.filter(appt => {
       let doctorid = this.state.user.id;
       let apptid = appt.doctorid;
 
       if(doctorid == apptid) {
         return appt;
       }
-    });
+  });
 
     this.setState({
       user,
-      myDocAppointments,
       appointments,
+      myDocAppointments,
       appointmentWasCreated:
         this.props.location.state &&
         this.props.location.state.appointmentCreated,
@@ -89,6 +89,24 @@ class Appointments extends Component {
     });
   };
 
+  // myDocAppointments = () => {
+  //   let myDocAppointments = this.state.appointments.filter(appt => {
+  //       let doctorid = this.state.user.id;
+  //       let apptid = appt.doctorid;
+
+  //       if(doctorid == apptid) {
+  //         return appt;
+  //       }
+  //   });
+  // }
+
+  handleDocAppt() {
+    return this.state.myDocAppointments.map(appt => {
+      return <DoctorAppts key={appt.id} appointment={appt} />
+    })
+
+  }
+
   render() {
     if(this.state.user.user_type === "patient") {
     return (
@@ -97,6 +115,7 @@ class Appointments extends Component {
           <div>
 
             <h1 className="text-info">My appointments</h1>
+            
             <Link
               style={{
                 display: "flex",
@@ -122,18 +141,18 @@ class Appointments extends Component {
           )}
           <div className="card" style={{ margin: "5px" }}>
             <div
-              class="card-header"
+              className="card-header"
               style={{
                 display: "flex"
               }}
             >
-              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
                 Date
               </h5>
-              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
                 Description
               </h5>
-              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
                 Doctor
               </h5>
             </div>
@@ -142,6 +161,70 @@ class Appointments extends Component {
           </div>
       </React.Fragment>
     );
+    } else {
+      return(
+        <React.Fragment>
+        <div className="container pt-5">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}
+          >
+            <h1 className="text-info">Appointments</h1>
+
+            <Link
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+              className="btn btn-outline-primary"
+              to={`/appointments`}
+              onClick={this.handleDocAppt}>
+              My Appointments
+            </Link>
+          
+          </div>
+
+          {this.state.appointmentWasCreated && (
+            <div className="alert alert-success" role="alert">
+              Appointment created!
+            </div>
+          )}
+
+          {this.state.appointmentWasCanceled && (
+            <div className="alert alert-success" role="alert">
+              Appointment cancelled!
+            </div>
+          )}
+          <div className="card" style={{ margin: "5px" }}>
+            <div
+              className="card-header"
+              style={{
+                display: "flex"
+              }}
+            >
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                Date
+              </h5>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                Description
+              </h5>
+              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                Doctor
+              </h5>
+            </div>
+          </div>
+          <ApptTimeline
+            cancelAppointment={this.cancelAppointment}
+            appts={this.state.appointments}
+          />
+          <div style={{ height: "250px" }} />
+        </div>
+      </React.Fragment>
+      );
+    }
   }
   else {
     return(

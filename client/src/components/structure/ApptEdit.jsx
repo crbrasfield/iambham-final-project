@@ -90,7 +90,7 @@ class ApptEdit extends Component {
     async handleSubmit(e) {
         try {
             let res = await apptService.insert(this.state);
-            this.props.history.replace(`/api/appointments/${this.props.match.params.id}`);
+            this.props.history.replace(`/appointments/${this.props.match.params.id}`);
             console.log(email, last_name, age, number, other);
 
         }
