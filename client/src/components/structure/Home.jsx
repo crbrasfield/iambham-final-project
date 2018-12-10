@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import PatientAuth from "../auth/patientAuth";
 import DoctorAuth from "../auth/doctorAuth";
 import { isLoggedIn } from "../../services/user";
+import PatientSignUp from "../auth/patientSignUp";
 
 class Home extends Component {
   render() {
@@ -26,6 +27,7 @@ class Home extends Component {
               <div className="m-5">{!isLoggedIn() && <PatientAuth />}</div>
               <div className="m-5">{!isLoggedIn() && <DoctorAuth />}</div>
             </div>
+            
             <div
               className=""
               style={{
