@@ -191,9 +191,9 @@ UNLOCK TABLES;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spDocAppts`(doctorid int)
 begin
-	select * from appointments a
-    join users on a.userid = users.id
-    where a.doctorid = doctorid;
+	select *, appointments.id as appointment_id from appointments 
+    join users on appointments.userid = users.id
+    where appointments.doctorid = doctorid;
     
 end ;;
 DELIMITER ;
@@ -232,4 +232,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-10 10:56:47
+-- Dump completed on 2018-12-10 11:15:26
