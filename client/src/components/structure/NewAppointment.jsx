@@ -61,10 +61,12 @@ export default class NewAppointment extends React.Component {
   render() {
     return (
       <div className="container pt-5">
+        <h1 className="text-info mb-2">New appointment</h1>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>When would you like to be seen?</label>
             <input
+              required
               type="date"
               id="start"
               name="trip-start"

@@ -21,16 +21,20 @@ class ApptTimeline extends Component {
   render() {
     return (
       <div>
-        <div
-          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
-        >
-          {this.state.appts.map(appt => {
-            return (
-              <div style={{ margin: "5px" }}>
-                <ApptCard appointment={appt} />
-              </div>
-            );
-          })}
+        <div class="accordion" id="accordionExample">
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {this.state.appts.map(appt => {
+              return (
+                <div style={{ margin: "5px" }}>
+                  <ApptCard
+                    cancelAppointment={this.props.cancelAppointment}
+                    key={appt.appointment_id}
+                    appointment={appt}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
