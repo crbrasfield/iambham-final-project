@@ -10,10 +10,19 @@ class Appointments extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      lastname: '',
+
       appointments: [],
       appointmentWasCreated: false,
       appointmentWasCanceled: false
     };
+    this.handleLast = this.handleLast.bind(this);
+  }
+
+  handleLast(e) {
+    this.setState({
+      lastname: e.target.value
+    });
   }
 
   componentDidMount() {
@@ -31,7 +40,9 @@ class Appointments extends Component {
         this.props.location.state.appointmentCreated,
       appointmentWasCanceled:
         this.props.location.state &&
-        this.props.location.state.appointmentWasCanceled
+        this.props.location.state.appointmentWasCanceled,
+        lastname:
+          this.props.value
     });
   }
 

@@ -144,7 +144,7 @@ class DoctorSignUp extends Component {
   <div className="modal-footer" style={{display: 'flex', justifyContent: 'space-between'}}>
     <button type="button" className="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
     <button type="button" className="btn btn-outline-dark" onClick={(e) => {
-                            e.preventDefault();
+                            // e.preventDefault();
                             this.handleCreateDoctor()}}>Register</button>
   </div>
 </div>
