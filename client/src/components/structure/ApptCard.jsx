@@ -10,12 +10,12 @@ export default ({ appointment, cancelAppointment }) => {
 
   return (
     <div
-      class="card"
+      className="card"
       key={appointment.appointment_id}
       style={{ width: "100%" }}
     >
       <div
-        class="card-header"
+        className="card-header"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -23,9 +23,9 @@ export default ({ appointment, cancelAppointment }) => {
         }}
         id={`apt-${appointment.appointment_id}`}
       >
-        <div class="mb-0" style={{ flex: 1 }}>
+        <div className="mb-0" style={{ flex: 1 }}>
           <button
-            class="btn btn-link text-info"
+            className="btn btn-link text-info"
             type="button"
             data-toggle="collapse"
             data-target={`#collapse${appointment.appointment_id}`}
@@ -35,10 +35,10 @@ export default ({ appointment, cancelAppointment }) => {
             {month}/{day}/{year}
           </button>
         </div>
-        <div class="mb-0 text-secondary" style={{ flex: 1 }}>
+        <div className="mb-0 text-secondary" style={{ flex: 1 }}>
           {appointment.description.substring(0, 10)}...
         </div>
-        <div class="mb-0 text-secondary" style={{ flex: 1 }}>
+        <div className="mb-0 text-secondary" style={{ flex: 1 }}>
           {appointment.doctorid ? (
             <Link to={`/doctor/${appointment.doctorid}`}>Doctor</Link>
           ) : (
@@ -49,11 +49,11 @@ export default ({ appointment, cancelAppointment }) => {
 
       <div
         id={`collapse${appointment.appointment_id}`}
-        class="collapse hide"
+        className="collapse hide"
         aria-labelledby={`apt-${appointment.appointment_id}`}
         data-parent="#accordionExample"
       >
-        <div class="card-body clearfix">
+        <div className="card-body clearfix">
           <div>{appointment.description}</div>
           <hr />
           <button

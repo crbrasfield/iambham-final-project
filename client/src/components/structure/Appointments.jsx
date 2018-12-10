@@ -6,7 +6,7 @@ import Input from "./Input";
 import * as appointmentService from "../../services/appointments";
 import { currentUser } from "../../services/user";
 import ApptCard from "./ApptCard";
-import DoctorAppts from "./DoctorAppts";
+
 
 class Appointments extends Component {
   constructor(props) {
@@ -17,10 +17,9 @@ class Appointments extends Component {
       appointments: [],
       myDocAppointments: [],
       appointmentWasCreated: false,
-      appointmentWasCanceled: false
+      appointmentWasCanceled: false,
+      docApptLoaded: false
     };
-
-    this.handleDocAppt = this.handleDocAppt.bind(this);
   }
 
   handleLast(e) {
@@ -35,8 +34,8 @@ class Appointments extends Component {
 
   async loadState() {
     let user = await currentUser();
-    let appointments = await appointmentService.all();
-    let myDocAppointments = this.state.appointments.filter(appt => {
+    const appointments = await appointmentService.all();
+    const myDocAppointments = appointments.filter(appt => {
       let doctorid = this.state.user.id;
       let apptid = appt.doctorid;
 
@@ -89,23 +88,6 @@ class Appointments extends Component {
     });
   };
 
-  // myDocAppointments = () => {
-  //   let myDocAppointments = this.state.appointments.filter(appt => {
-  //       let doctorid = this.state.user.id;
-  //       let apptid = appt.doctorid;
-
-  //       if(doctorid == apptid) {
-  //         return appt;
-  //       }
-  //   });
-  // }
-
-  handleDocAppt() {
-    return this.state.myDocAppointments.map(appt => {
-      return <DoctorAppts key={appt.id} appointment={appt} />
-    })
-
-  }
 
   render() {
     if(this.state.user.user_type === "patient") {
@@ -174,16 +156,14 @@ class Appointments extends Component {
           >
             <h1 className="text-info">Appointments</h1>
 
-            <Link
+            <button
               style={{
                 display: "flex",
                 justifyContent: "center"
               }}
-              className="btn btn-outline-primary"
-              to={`/appointments`}
-              onClick={this.handleDocAppt}>
+              className="btn btn-outline-primary">
               My Appointments
-            </Link>
+            </button>
           
           </div>
 
