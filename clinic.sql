@@ -232,4 +232,11 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spUserAppts`(userid int)
+begin 
+    select *, appointments.id as appointment_id from appointments
+    join users u on u.id = userid
+    where appointments.userid = userid; 
+end
+
 -- Dump completed on 2018-12-06 12:19:10
