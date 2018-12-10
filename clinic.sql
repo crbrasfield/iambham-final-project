@@ -27,11 +27,11 @@ CREATE TABLE `appointments` (
   `description` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `userid` int(11) NOT NULL,
-  `doctorid` int(11) NOT NULL,
+  `doctorid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_userid` (`userid`),
   CONSTRAINT `fk_userid` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `tokens` (
   PRIMARY KEY (`id`),
   KEY `fk_users` (`userid`),
   CONSTRAINT `fk_users` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +139,7 @@ CREATE TABLE `tokens` (
 
 LOCK TABLES `tokens` WRITE;
 /*!40000 ALTER TABLE `tokens` DISABLE KEYS */;
-INSERT INTO `tokens` VALUES (4,1),(5,1),(7,1),(8,1),(12,1),(17,1),(19,1),(2,2),(18,2),(1,3),(6,4),(9,4),(10,4),(11,4),(13,4),(14,4),(15,4),(16,4),(3,6);
+INSERT INTO `tokens` VALUES (4,1),(5,1),(7,1),(8,1),(12,1),(17,1),(19,1),(21,1),(23,1),(2,2),(18,2),(1,3),(6,4),(9,4),(10,4),(11,4),(13,4),(14,4),(15,4),(16,4),(20,4),(22,4),(24,4),(3,6);
 /*!40000 ALTER TABLE `tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +213,7 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spUserAppts`(userid int)
 begin 
-	select * from appointments
+	select *, appointments.id as appointment_id from appointments
     join users u on u.id = userid
     where appointments.userid = userid; 
 end ;;
@@ -232,4 +232,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-06 12:19:10
+-- Dump completed on 2018-12-10 10:56:47
