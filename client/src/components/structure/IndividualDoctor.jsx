@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import * as doctorService from '../../services/doctors';
 import * as apptService from '../../services/appointments';
+import { SSL_OP_TLS_BLOCK_PADDING_BUG } from 'constants';
 
 class IndividualDoctor extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class IndividualDoctor extends Component {
 
         this.state = {
             doctor: {},
-            appointments: {},
+            appointments: {}
         }
     }
 
@@ -16,16 +17,8 @@ class IndividualDoctor extends Component {
         try {
             let id = this.props.match.params.id;
             let doctor = await doctorService.one(id);
-            let apptArr = await apptService.all();
 
-            let appointments = apptArr.map(appt => {
-                return {
-                    id: appt.id,
-                    description: appt.description
-                }
-            });
-
-            this.setState({ doctor, appointments });
+            this.setState({ doctor });
             console.table(this.state.doctor);
         } catch (err) {
             console.error(err);
@@ -36,8 +29,7 @@ class IndividualDoctor extends Component {
         return (
             <div style={style}>
                 <h1>Doctor: {this.state.doctor.first_name} {this.state.doctor.last_name}</h1>
-                <h5>Appointments:  </h5>
-                
+            
             </div>
         )
     }
