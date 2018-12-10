@@ -8,10 +8,10 @@ class PatientSignUp extends Component {
         super(props);
 
         this.state = {
-            newPatient: {},
+            //newPatient: {},
 
-            firstname: '',
-            lastname: '',
+            first_name: '',
+            last_name: '',
             number: '',
             email: '',
             password: '',
@@ -24,17 +24,18 @@ class PatientSignUp extends Component {
         this.handleNumber = this.handleNumber.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.handleAge = this.handleAge.bind(this);
 
     }
 
     handleFirst(e) {
         // console.log(e.target.value);
-        this.setState({ firstname: e.target.value });
+        this.setState({ first_name: e.target.value });
     }
 
     handleLast(e) {
         // console.log(e.target.value);
-        this.setState({ lastname: e.target.value });
+        this.setState({ last_name: e.target.value });
     }
 
 
@@ -53,19 +54,24 @@ class PatientSignUp extends Component {
         this.setState({ number: e.target.value });
     }
 
-    async handleCreatePatient() {
+    handleAge(e) {
+        this.setState({ age: e.target.value });
+    }
+    
+    async handleCreatePatient(e) {
+        e.preventDefault();
 
         console.log(this.state);
 
         try {
-            let newPatient = await fetch('api/createpatient', {
+            let newPatient = await fetch('api/new/createpatient', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(this.state)
             });
-            this.setState({ newPatient });
+            //this.setState({ newPatient });
         } catch (err) {
             console.error(err);
         }
@@ -97,15 +103,22 @@ class PatientSignUp extends Component {
 
                                             <div className="form-group col-md-4">
                                                 <label for="person"></label>
-                                                <input type="text" className="form-control" value={this.state.firstname} onChange={this.handleFirst} aria-describedby="textHelp" placeholder="Enter First Name"
-                                                // onChange={e => this.setState({ firstname: e.target.value })}
+                                                <input type="text" className="form-control" value={this.state.first_name} onChange={this.handleFirst} aria-describedby="textHelp" placeholder="Enter First Name"
+                                                // onChange={e => this.setState({ first_name: e.target.value })}
                                                 />
                                             </div>
 
                                             <div className="form-group col-md-4">
                                                 <label for="person"></label>
-                                                <input type="text" className="form-control" value={this.state.lastname} onChange={this.handleLast} aria-describedby="textHelp" placeholder="Enter Last Name"
-                                                // onChange={e => this.setState({ lastname: e.target.value })} 
+                                                <input type="text" className="form-control" value={this.state.last_name} onChange={this.handleLast} aria-describedby="textHelp" placeholder="Enter Last Name"
+                                                // onChange={e => this.setState({ last_name: e.target.value })} 
+                                                />
+                                            </div>
+
+                                             <div className="form-group col-md-4">
+                                                <label for="person"></label>
+                                                <input type="text" className="form-control" value={this.state.age} onChange={this.handleAge} aria-describedby="textHelp" placeholder="Enter Age"
+                                                // onChange={e => this.setState({ last_name: e.target.value })} 
                                                 />
                                             </div>
 

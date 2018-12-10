@@ -20,6 +20,7 @@ import doctorLogin from "./auth/doctorLogin";
 import patientLogin from "./auth/patientLogin";
 import Profile from "./structure/profile";
 import Footer from "./structure/Footer";
+import PatientSignUp from "./auth/patientSignUp"
 
 class Navigation extends Component {
   state = {
@@ -52,6 +53,7 @@ class Navigation extends Component {
               <Route exact path="/aboutInnovateHealth" component={About} />
               <PrivateRoute exact path="/profile" component={Profile} />
               <PrivateRoute exact path="/schedule" component={Schedule} />
+              <Route exact path="/patientsignup" component={PatientSignUp} />
               <PrivateRoute
                 exact
                 path="/appointments"
