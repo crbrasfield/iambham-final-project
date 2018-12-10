@@ -4,99 +4,47 @@ import { Link } from "react-router-dom";
 import ApptTimeline from "./ApptTimeline";
 import Input from "./Input";
 import * as appointmentService from "../../services/appointments";
+import { currentUser } from "../../services/user";
 
 class Appointments extends Component {
   constructor(props) {
     super(props);
     this.state = {
       appointments: [],
-      firstname: "",
-      lastname: "",
-      age: "",
-      email: "",
-      password: "",
-      number: "",
-      other: "",
-      description: ""
+      appointmentWasCreated: false,
+      appointmentWasCanceled: false
     };
-    this.handleFirst = this.handleFirst.bind(this);
-    this.handleLast = this.handleLast.bind(this);
-    this.handleAge = this.handleAge.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
-    this.handleNumber = this.handleNumber.bind(this);
-    this.handleOther = this.handleOther.bind(this);
-    this.handleDescription = this.handleDescription.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.loadState();
+  }
+
+  async loadState() {
+    let user = await currentUser();
     let appointments = await appointmentService.all();
+
     this.setState({
       appointments,
       appointmentWasCreated:
         this.props.location.state &&
-        this.props.location.state.appointmentCreated
+        this.props.location.state.appointmentCreated,
+      appointmentWasCanceled:
+        this.props.location.state &&
+        this.props.location.state.appointmentWasCanceled
     });
   }
 
-  handleFirst(e) {
-    // console.log(e.target.value);
-    this.setState({ firstname: e.target.value });
-  }
+  cancelAppointment = id => {
+    appointmentService.destroy(id).then(res => {
+      this.props.history.replace("/appointments", {
+        appointmentWasCanceled: true,
+        appointmentWasCreated: false
+      });
 
-  handleLast(e) {
-    // console.log(e.target.value);
-    this.setState({ lastname: e.target.value });
-  }
-
-  handleAge(e) {
-    // console.log(e.target.value);
-    this.setState({ age: e.target.value });
-  }
-
-  handleEmail(e) {
-    // console.log(e.target.value);
-    this.setState({ email: e.target.value });
-  }
-
-  handlePassword(e) {
-    // console.log(e.target.value);
-    this.setState({ password: e.target.value });
-  }
-
-  handleNumber(e) {
-    // console.log(e.target.value);
-    this.setState({ number: e.target.value });
-  }
-
-  handleOther(e) {
-    // console.log(e.target.value);
-    this.setState({ other: e.target.value });
-  }
-
-  handleDescription(e) {
-    // console.log(e.target.value);
-    this.setState({ description: e.target.value });
-  }
-
-  async handleSubmit(e) {
-    e.preventDefault();
-    try {
-      let res = await fetch(
-        "api/appointments"
-        // {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": "applications/json"
-        //     },
-        //     body: JSON.stringify(this.state)
-        // }
-      );
-
-      //this.props.history.replace('/');
-    } catch (err) {}
-  }
+      this.loadState();
+    });
+  };
 
   render() {
     return (
@@ -127,7 +75,34 @@ class Appointments extends Component {
               Appointment created!
             </div>
           )}
-          <ApptTimeline appts={this.state.appointments} />
+
+          {this.state.appointmentWasCanceled && (
+            <div className="alert alert-success" role="alert">
+              Appointment canceled!
+            </div>
+          )}
+          <div className="card" style={{ margin: "5px" }}>
+            <div
+              class="card-header"
+              style={{
+                display: "flex"
+              }}
+            >
+              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+                Date
+              </h5>
+              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+                Description
+              </h5>
+              <h5 class="mb-0 text-info" style={{ flex: 1 }}>
+                Doctor
+              </h5>
+            </div>
+          </div>
+          <ApptTimeline
+            cancelAppointment={this.cancelAppointment}
+            appts={this.state.appointments}
+          />
           <div style={{ height: "250px" }} />
         </div>
       </React.Fragment>
