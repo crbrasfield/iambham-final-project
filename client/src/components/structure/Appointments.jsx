@@ -78,7 +78,7 @@ class Appointments extends Component {
 
           {this.state.appointmentWasCanceled && (
             <div className="alert alert-success" role="alert">
-              Appointment canceled!
+              Appointment cancelled!
             </div>
           )}
           <div className="card" style={{ margin: "5px" }}>

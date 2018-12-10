@@ -84,4 +84,15 @@ router.delete("/:id", (req, res) => {
   }
 });
 
+router.put("/:id", (req, res) => {
+  let id = req.params.id;
+  const user = req.user;
+
+  if(user.user_type === "patient") {
+    apptTable.update(id, req.body)
+      .then(results => res.send(results))
+      .catch(err => res.send(err))
+  }  
+});
+
 export default router;

@@ -95,5 +95,17 @@ router.delete("/:id", function (req, res) {
     });
   }
 });
+router.put("/:id", function (req, res) {
+  var id = req.params.id;
+  var user = req.user;
+
+  if (user.user_type === "patient") {
+    apptTable.update(id, req.body).then(function (results) {
+      return res.send(results);
+    }).catch(function (err) {
+      return res.send(err);
+    });
+  }
+});
 var _default = router;
 exports.default = _default;

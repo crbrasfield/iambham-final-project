@@ -23,6 +23,16 @@ router.get(router.get('/:id?', (req, res) => {
     }
 }));
 
+router.put('/:id', (req, res) => {
+    let id = req.params.id;
+    const user = req.user;
+    let editAppt = req.body;
 
+    if (user.user_type === 'doctor') {
+        apptTable.update(id, editAppt)
+            .then(results => res.send(results))
+            .catch(err => res.sendStatus(500));
+    }
+});
 
 export default router;
