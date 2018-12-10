@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import * as userService from "../../services/user";
 import { Redirect } from "react-router-dom";
 import IndeterminateProgress from "../utilities/indeterminateProgress";
+import DoctorSignUp from "./doctorSignUp";
 
 class doctorLogin extends Component {
   constructor(props) {
@@ -94,8 +95,9 @@ class doctorLogin extends Component {
             <p>{this.state.feedbackMessage}</p>
           ) : null}
           <button type="submit" class="btn btn-primary">
-            Submit
+            Login
           </button>
+          <DoctorSignUp />
         </form>
         <img
           src="https://i.pinimg.com/originals/b6/21/c9/b621c9205402362ae059e5936f82e2fa.gif"
