@@ -1,4 +1,4 @@
-import * as baseService from './base';
+import * as baseService from "./base";
 
 function all() {
   return baseService.get(`/api/appointments`);

@@ -1,7 +1,7 @@
-import * as baseService from './base';
+import * as baseService from "./base";
 
 function all() {
-  return baseService.get("/api/doctor/user");
+  return baseService.get("/api/doctor/user/doctors");
 }
 
 function one(id) {
