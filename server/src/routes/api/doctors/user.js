@@ -4,7 +4,7 @@ import Table from "../../../table";
 let router = Router();
 let usersTable = new Table("users");
 
-router.get("/doctor/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   let id = req.params.id;
   const user = req.user;
 
@@ -15,10 +15,11 @@ router.get("/doctor/:id", (req, res) => {
         res.send(results);
       })
       .catch(err => res.sendStatus(500));
-  } else if (id !== user.id) {
-    res.send("No access");
-  }
-});
+    }
+//   } else if (id !== user.id) {
+//     res.send("No access");
+//   }
+// });
 
 router.get("/doctors", (req, res) => {
   usersTable.getAll().then(results => {

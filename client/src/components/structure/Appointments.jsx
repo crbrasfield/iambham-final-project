@@ -18,7 +18,8 @@ class Appointments extends Component {
       myDocAppointments: [],
       appointmentWasCreated: false,
       appointmentWasCanceled: false,
-      docApptLoaded: false
+      myDocApptLoaded: false,
+      allApptLoaded: true
     };
   }
 
@@ -57,6 +58,8 @@ class Appointments extends Component {
         lastname:
           this.props.value
     });
+
+    console.log(this.state.appointments, this.state.myDocAppointments);
   }
 
   async handleNewAppointment() {
