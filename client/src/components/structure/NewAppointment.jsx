@@ -59,6 +59,7 @@ export default class NewAppointment extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="container pt-5">
         <h1 className="text-info mb-2">New Appointment</h1>

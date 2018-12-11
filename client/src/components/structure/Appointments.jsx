@@ -7,7 +7,6 @@ import * as appointmentService from "../../services/appointments";
 import { currentUser } from "../../services/user";
 import ApptCard from "./ApptCard";
 
-
 class Appointments extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +18,8 @@ class Appointments extends Component {
       appointmentWasCreated: false,
       appointmentWasCanceled: false,
       myDocApptLoaded: false,
-      allApptLoaded: true
+      allApptLoaded: true,
+      showAllAppointments: false
     };
   }
 
@@ -37,13 +37,13 @@ class Appointments extends Component {
     let user = await currentUser();
     const appointments = await appointmentService.all();
     const myDocAppointments = appointments.filter(appt => {
-      let doctorid = this.state.user.id;
+      let doctorid = user.id;
       let apptid = appt.doctorid;
 
-      if(doctorid == apptid) {
+      if (doctorid == apptid) {
         return appt;
       }
-  });
+    });
 
     this.setState({
       user,
@@ -91,121 +91,158 @@ class Appointments extends Component {
     });
   };
 
-
   render() {
-    if(this.state.user.user_type === "patient") {
-    return (
-      <React.Fragment>
-        <div className="container pt-5">
-          <div>
-
-            <h1 className="text-info">My appointments</h1>
-            
-            <Link
-              style={{
-                display: "flex",
-                justifyContent: "center"
-              }}
-              className="btn btn-outline-primary"
-              to={`/appointments/new`}
-            >
-              New Appointment
-            </Link>
-          </div>
-          <div>
-          {this.state.appointmentWasCreated && (
-            <div className="alert alert-success" role="alert">
-              Appointment created!
-            </div>
-          )}
-
-          {this.state.appointmentWasCanceled && (
-            <div className="alert alert-success" role="alert">
-              Appointment cancelled!
-            </div>
-          )}
-          <div className="card" style={{ margin: "5px" }}>
-            <div
-              className="card-header"
-              style={{
-                display: "flex"
-              }}
-            >
-              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-                Date
-              </h5>
-              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-                Description
-              </h5>
-              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-                Doctor
-              </h5>
-            </div>
-          </div>
-          </div>
-          </div>
-      </React.Fragment>
-    );
-    } else {
-      return(
+    if (this.state.user.user_type === "patient") {
+      return (
         <React.Fragment>
-        <div className="container pt-5">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }}
-          >
-            <h1 className="text-info">Appointments</h1>
-
-            <button
+          <div className="container pt-5">
+            <div
               style={{
                 display: "flex",
-                justifyContent: "center"
-              }}
-              className="btn btn-outline-primary">
-              My Appointments
-            </button>
-          
-          </div>
-
-          {this.state.appointmentWasCreated && (
-            <div className="alert alert-success" role="alert">
-              Appointment created!
-            </div>
-          )}
-
-          {this.state.appointmentWasCanceled && (
-            <div className="alert alert-success" role="alert">
-              Appointment cancelled!
-            </div>
-          )}
-          <div className="card" style={{ margin: "5px" }}>
-            <div
-              className="card-header"
-              style={{
-                display: "flex"
+                justifyContent: "space-between",
+                alignItems: "center"
               }}
             >
-              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-                Date
-              </h5>
-              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-                Description
-              </h5>
-              <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-                Doctor
-              </h5>
+              <h1 className="text-info">My appointments</h1>
+
+              <Link
+                style={{
+                  display: "flex",
+                  justifyContent: "center"
+                }}
+                className="btn btn-outline-primary"
+                to={`/appointments/new`}
+              >
+                New Appointment
+              </Link>
             </div>
+
+            {this.state.appointmentWasCreated && (
+              <div className="alert alert-success" role="alert">
+                Appointment created!
+              </div>
+            )}
+
+            {this.state.appointmentWasCanceled && (
+              <div className="alert alert-success" role="alert">
+                Appointment cancelled!
+              </div>
+            )}
+            <div className="card" style={{ margin: "5px" }}>
+              <div
+                className="card-header"
+                style={{
+                  display: "flex"
+                }}
+              >
+                <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                  Date
+                </h5>
+                <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                  Description
+                </h5>
+                <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                  Doctor
+                </h5>
+              </div>
+            </div>
+            <ApptTimeline
+              cancelAppointment={this.cancelAppointment}
+              appts={this.state.appointments}
+            />
+            <div style={{ height: "250px" }} />
           </div>
-          <ApptTimeline
-            cancelAppointment={this.cancelAppointment}
-            appts={this.state.appointments}
-          />
-          <div style={{ height: "250px" }} />
-        </div>
-      </React.Fragment>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <div className="container pt-5">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}
+            >
+              <h1 className="text-info">Appointments</h1>
+              <div style={{ display: "flex" }}>
+                <button
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginRight: "15px"
+                  }}
+                  className={
+                    this.state.showAllAppointments
+                      ? "btn btn-primary"
+                      : "btn btn-outline-primary"
+                  }
+                  onClick={() => {
+                    this.setState({ showAllAppointments: true });
+                  }}
+                >
+                  All Appointments
+                </button>
+                <button
+                  style={{
+                    display: "flex",
+                    justifyContent: "center"
+                  }}
+                  className={
+                    !this.state.showAllAppointments
+                      ? "btn btn-primary"
+                      : "btn btn-outline-primary"
+                  }
+                  onClick={() => {
+                    this.setState({ showAllAppointments: false });
+                  }}
+                >
+                  My Appointments
+                </button>
+              </div>
+            </div>
+
+            {this.state.appointmentWasCreated && (
+              <div className="alert alert-success" role="alert">
+                Appointment created!
+              </div>
+            )}
+
+            {this.state.appointmentWasCanceled && (
+              <div className="alert alert-success" role="alert">
+                Appointment cancelled!
+              </div>
+            )}
+            <div className="card" style={{ margin: "5px" }}>
+              <div
+                className="card-header"
+                style={{
+                  display: "flex"
+                }}
+              >
+                <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                  Date
+                </h5>
+                <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                  Description
+                </h5>
+                <h5 className="mb-0 text-info" style={{ flex: 1 }}>
+                  Doctor
+                </h5>
+              </div>
+            </div>
+            <ApptTimeline
+              cancelAppointment={this.cancelAppointment}
+              appts={
+                this.state.showAllAppointments
+                  ? this.state.appointments
+                  : this.state.myDocAppointments
+              }
+            />
+            <div style={{ height: "250px" }} />
+          </div>
+        </React.Fragment>
       );
     }
   }
