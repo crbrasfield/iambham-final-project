@@ -21,6 +21,7 @@ import patientLogin from "./auth/patientLogin";
 import Profile from "./structure/profile";
 import Footer from "./structure/Footer";
 import PatientSignUp from "./auth/patientSignUp"
+import ListDocs from "./structure/DoctorCard";
 
 class Navigation extends Component {
   state = {
@@ -84,6 +85,7 @@ class Navigation extends Component {
                 path="/doctor/:id"
                 component={IndividualDoctor}
               />
+              <Route exact path="/doctors" component={ListDocs} />
             </Switch>
           </div>
           <Footer />
