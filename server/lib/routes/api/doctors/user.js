@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = (0, _express.Router)();
 var usersTable = new _table.default("users");
-router.get("/doctor/:id", function (req, res) {
+router.get("/:id", function (req, res) {
   var id = req.params.id;
   var user = req.user;
 

@@ -18,7 +18,8 @@ class Appointments extends Component {
       myDocAppointments: [],
       appointmentWasCreated: false,
       appointmentWasCanceled: false,
-      docApptLoaded: false
+      myDocApptLoaded: false,
+      allApptLoaded: true
     };
   }
 
@@ -49,6 +50,8 @@ class Appointments extends Component {
         this.props.location.state &&
         this.props.location.state.appointmentWasCanceled
     });
+
+    console.log(this.state.appointments, this.state.myDocAppointments);
   }
 
   cancelAppointment = id => {

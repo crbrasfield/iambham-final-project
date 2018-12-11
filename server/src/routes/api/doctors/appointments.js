@@ -4,7 +4,7 @@ import Table from '../../../table';
 let router = Router();
 let apptTable = new Table('appointments');
 
-router.get(router.get('/:id?', (req, res) => {
+router.get('/:id?', (req, res) => {
     let id = req.params.id;
     const user = req.user;
 
@@ -21,7 +21,7 @@ router.get(router.get('/:id?', (req, res) => {
     } else {
         res.sendStatus(401)
     }
-}));
+});
 
 router.put('/:id', (req, res) => {
     let id = req.params.id;
