@@ -9,12 +9,15 @@ var _express = require("express");
 
 var _table = _interopRequireDefault(require("../../table"));
 
+var _db = require("../../config/db");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = (0, _express.Router)();
 var insuranceTable = new _table.default("insurances");
 router.get('/:id?', function (req, res) {
   var id = req.params.id;
+  var user = req.user;
 
   if (id) {
     insuranceTable.getOne(id).then(function (results) {
