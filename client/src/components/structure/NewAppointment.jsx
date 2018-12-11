@@ -38,6 +38,22 @@ export default class NewAppointment extends React.Component {
     });
   };
 
+  async handleNewAppt() {
+
+    try {
+        let newAppt = await fetch('api/appointments', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state)
+        });
+        this.setState({ newAppt });
+    } catch (err) {
+        console.error(err);
+    }
+}
+
   today = () => {
     const date = new Date();
     const month = date.getMonth();
@@ -61,7 +77,7 @@ export default class NewAppointment extends React.Component {
   render() {
     return (
       <div className="container pt-5">
-        <h1 className="text-info mb-2">New appointment</h1>
+        <h1 className="text-info mb-2">New Appointment</h1>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>When would you like to be seen?</label>
@@ -108,7 +124,9 @@ export default class NewAppointment extends React.Component {
             </select>
           </div>
 
-          <button type="submit" className="btn btn-info">
+          <button type="submit" className="btn btn-info" onClick={(e) => {
+              e.preventDefault();
+              this.handleNewAppt()}}>
             Submit
           </button>
         </form>

@@ -35,5 +35,18 @@ router.get(router.get('/:id?', function (req, res) {
     res.sendStatus(401);
   }
 }));
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var user = req.user;
+  var editAppt = req.body;
+
+  if (user.user_type === 'doctor') {
+    apptTable.update(id, editAppt).then(function (results) {
+      return res.send(results);
+    }).catch(function (err) {
+      return res.sendStatus(500);
+    });
+  }
+});
 var _default = router;
 exports.default = _default;

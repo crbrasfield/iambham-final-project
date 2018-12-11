@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import * as userService from '../../services/user';
+import * as doctorService from '../../services/doctors';
 import { Redirect } from 'react-router-dom';
 import IndeterminateProgress from '../utilities/indeterminateProgress';
 
@@ -60,14 +61,16 @@ class DoctorSignUp extends Component {
     }
     async handleCreateDoctor() {
         try {
-            let newDoctor = await fetch('api/new/createdoctor', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(this.state)
-            });
+            let newDoctor = doctorService.insert(this.state)
+            // let newDoctor = await fetch('api/new/createdoctor', {
+            //     method: 'POST',
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     },
+            //     body: JSON.stringify(this.state)
+            // });
             // this.setState({ newDoctor });
+            this.props.history.replace('/');
         } catch (err) {
             console.error(err);
         }
