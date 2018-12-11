@@ -9,8 +9,8 @@ class ApptEdit extends Component {
         super(props);
         this.state = {
 
-            firstname: '',
-            lastname: '',
+            first_name: '',
+            last_name: '',
             age: '',
             email: '',
             password: '',
@@ -33,28 +33,28 @@ class ApptEdit extends Component {
         try {
             let res = await fetch(`/api/appointments/${this.props.match.params.id}`);
             let appt = await res.json();
-            let firstname = appt.firstname;
-            let lastname = appt.lastname;
+            let first_name = appt.first_name;
+            let last_name = appt.last_name;
             let age = appt.age;
             let email = appt.email;
             let password = appt.password;
             let number = appt.number;
             let other = appt.other;
             let description = appt.description;
-            this.setState({ firstname: firstname, lastname: lastname, age: age, email: email, password: password, number: number, other: other, description: description });
+            this.setState({ first_name: first_name, last_name: last_name, age: age, email: email, password: password, number: number, other: other, description: description });
         } catch (e) { }
     }
 
     handleFirst(e) {
         // console.log(e.target.value);
         this.setState({
-            firstname: e.target.value
+            first_name: e.target.value
         });
     }
 
     handleLast(e) {
         // console.log(e.target.value);
-        this.setState({ lastname: e.target.value });
+        this.setState({ last_name: e.target.value });
     }
 
     handleAge(e) {
@@ -91,7 +91,7 @@ class ApptEdit extends Component {
         try {
             let res = await apptService.insert(this.state);
             this.props.history.replace(`/api/appointments/${this.props.match.params.id}`);
-            console.log(email, lastname, age, number, other);
+            console.log(email, last_name, age, number, other);
 
         }
         catch (err) { console.log(`You've got yourself an error there : ${err}`) }
@@ -112,8 +112,8 @@ class ApptEdit extends Component {
                     handleDescription={this.handleDescription}
                     handleSubmit={this.handleSubmit}
 
-                    firstname={this.state.firstname}
-                    lastname={this.state.lastname}
+                    first_name={this.state.first_name}
+                    last_name={this.state.last_name}
                     age={this.state.age}
                     email={this.state.email}
                     password={this.state.password}
@@ -130,11 +130,11 @@ class ApptEdit extends Component {
                             <div className="form-group col-md-5">
                                 <label for="person"></label>
                                 <input type="text" className="form-control" aria-describedby="textHelp" placeholder="First Name"
-                                    value= {this.state({ firstname: e.target.value })}  />
+                                    value= {this.state({ first_name: e.target.value })}  />
                             </div>
                             <div className="form-group col-md-5">
                                 <label for="person"></label>
-                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="Last Name" value= {this.state({lastname: e.target.value })} />
+                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="Last Name" value= {this.state({last_name: e.target.value })} />
                             </div>
                             <div className="form-group col-md-2">
                                 <label for="age"></label>

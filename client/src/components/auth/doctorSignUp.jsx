@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import * as userService from '../../services/user';
+import * as doctorService from '../../services/doctors';
 import { Redirect } from 'react-router-dom';
 import IndeterminateProgress from '../utilities/indeterminateProgress';
 

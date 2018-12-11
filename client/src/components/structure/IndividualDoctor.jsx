@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import * as doctorService from '../../services/doctors';
 import * as apptService from '../../services/appointments';
+import { SSL_OP_TLS_BLOCK_PADDING_BUG } from 'constants';
 
 class IndividualDoctor extends Component {
     constructor(props) {
@@ -43,7 +44,5 @@ class IndividualDoctor extends Component {
     }
 }
 
-const style = {
-    marginTop: "7%"
-}
+
 export default IndividualDoctor;
