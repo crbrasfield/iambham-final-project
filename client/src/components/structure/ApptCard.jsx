@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default ({ appointment, cancelAppointment }) => {
+export default ({ appointment, cancelAppointment, doctor }) => {
   const date = new Date(appointment.date);
 
   const month = date.getMonth();
   const day = date.getDate();
   const year = date.getFullYear();
+
+  console.log(doctor);
 
   return (
     <div
@@ -40,7 +42,9 @@ export default ({ appointment, cancelAppointment }) => {
         </div>
         <div className="mb-0 text-secondary" style={{ flex: 1 }}>
           {appointment.doctorid ? (
-            <Link to={`/doctor/${appointment.doctorid}`}>Doctor</Link>
+            <Link to={`/doctor/${appointment.doctorid}`}>
+              Dr. {doctor.last_name}
+            </Link>
           ) : (
             "-"
           )}
