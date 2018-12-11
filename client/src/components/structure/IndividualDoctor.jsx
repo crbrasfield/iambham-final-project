@@ -29,7 +29,8 @@ class IndividualDoctor extends Component {
         return (
             <div style={style}>
                 <h1>Doctor: {this.state.doctor.first_name} {this.state.doctor.last_name}</h1>
-            
+                <h6>Phone: {this.state.doctor.phone}</h6>
+                <h6>E-mail: {this.state.doctor.email}</h6>
             </div>
         )
     }

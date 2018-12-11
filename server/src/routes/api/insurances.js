@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import Table from '../../table';
+import { callProcedure } from "../../config/db"
 
 let router = Router();
 let insuranceTable = new Table("insurances");
 
 router.get('/:id?', (req, res) => {
     const id = req.params.id;
+    const user = req.user;
 
     if (id) {
         insuranceTable.getOne(id)

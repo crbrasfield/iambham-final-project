@@ -68,7 +68,17 @@ export default ({ appointment, cancelAppointment, doctor }) => {
             }}
           >
             Cancel appointment
-          </button>
+          </button> 
+        </div>
+        <div className="card-body clearfix">
+          <div>{appointment.description}</div>
+          <hr />
+          <button
+            className="btn btn-danger mt-2 float-right"
+            style={{ marginLeft: "auto" }}
+          >
+            Edit appointment
+          </button>  
         </div>
       </div>
     </div>
