@@ -73,12 +73,13 @@ export default ({ appointment, cancelAppointment, doctor }) => {
         <div className="card-body clearfix">
           <div>{appointment.description}</div>
           <hr />
-          <button
+          <Link
             className="btn btn-danger mt-2 float-right"
             style={{ marginLeft: "auto" }}
+            to={`appointments/${appointment.appointment_id}/edit`}
           >
             Edit appointment
-          </button>  
+          </Link>  
         </div>
       </div>
     </div>
