@@ -97,7 +97,6 @@ class doctorLogin extends Component {
           <button type="submit" class="btn btn-primary">
             Login
           </button>
-          <DoctorSignUp />
         </form>
         <img
           src="https://i.pinimg.com/originals/b6/21/c9/b621c9205402362ae059e5936f82e2fa.gif"

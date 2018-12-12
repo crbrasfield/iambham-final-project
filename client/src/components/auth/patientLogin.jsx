@@ -96,7 +96,7 @@ class patientLogin extends Component {
           {this.state.feedbackMessage ? (
             <p>{this.state.feedbackMessage}</p>
           ) : null}
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary mr-2">
             Login
           </button>
           <div>
