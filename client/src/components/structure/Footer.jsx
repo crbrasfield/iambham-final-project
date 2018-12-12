@@ -20,7 +20,7 @@ class Footer extends Component {
           <div className="col-md-4">
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}
@@ -76,7 +76,7 @@ class Footer extends Component {
           <div className="col-md-2">
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}
@@ -133,7 +133,7 @@ class Footer extends Component {
           <div className="col-md-3">
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}
@@ -178,7 +178,7 @@ class Footer extends Component {
           >
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}

@@ -15,12 +15,17 @@ class Home extends Component {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <div className="button-group">
           <div className="cont" style={{ position: 'relative', marginLeft: '0%' }}>
-            <h3 className="text-center text-info w-75 m-auto pt-5">
-              Innovate Health is a major center for clinical use. Our faculty
-              physicians, nursing staff, and support personnel are committed to
-              providing world-class care to every patient.
-            </h3>
-            <div
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+          <img style={{height: '100px', width: '100px', marginTop: '2%'}} src="https://www.parkingpanda.com/cdn/azure/images/seo/logos/grady_cross.png" alt="cross"/>
+          <div>
+            <h1 style={{}} className="text-center w-75 m-auto pt-5">
+             INNOVATE HEALTH
+            </h1>
+            </div>
+          </div>  <br/>
+           
+            
+            {/* <div
               style={{
                 display: "flex",
                 justifyContent: "center"
@@ -28,9 +33,49 @@ class Home extends Component {
             >
               <div className="m-5">{!isLoggedIn() && <PatientAuth />}</div>
               <div className="m-5">{!isLoggedIn() && <DoctorAuth />}</div>
-            </div>
+            </div> */}
 
-            <div class="row" style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{marginLeft: '12%'}}>
+              <div className="row" style={{ width: '88%', border: '5px solid #FF2C4E'}}>
+              <div className="col-sm-3" style={{margin: '7%', marginTop: '15%'}}>
+                <h1 style={{textAlign: 'center'}}>A Clinic That Cares</h1>
+                <h1 style={{textAlign: 'center'}}>A Clinic You Can Trust</h1>
+                </div>
+          
+                {/* <div style={{height: '282px', width: '454px', display: 'flex', justifyContent: 'flex-end'}}>
+                  
+                </div> */}
+              <div className="col-sm-6">
+                <img src="https://i.pinimg.com/originals/20/90/62/20906274d1b4c47333a97c758db0b9a5.png" alt="innovate landing"/>
+              </div>
+              
+            </div>
+            </div>
+            
+
+
+
+            {/* <div style={{display: 'flex', justifyContent: 'center'}}>
+              <div className="row" style={{width: '88%', border: '5px solid #FF2C4E'}}>
+              <div>
+                  <div className="col-md-4" style={{margin: '7%'}}>
+                <h1>A Clinic That Cares</h1>
+                </div>
+<div className="col-md-8">
+  <img src="https://i.pinimg.com/originals/20/90/62/20906274d1b4c47333a97c758db0b9a5.png" alt="innovate landing"/>
+</div>
+              </div>
+            <div>
+            <div className="col-md-4" style={{margin: '7%'}}>
+                  <h1>A Clinic You Can Trust</h1>
+                </div>
+                <div className="col-md-8"></div>
+            </div>
+              
+            </div>
+            </div> */}
+
+            {/* <div class="row" style={{ display: 'flex', justifyContent: 'center' }}>
               <div
                 className="col-md-8"
                 style={{
@@ -48,24 +93,24 @@ class Home extends Component {
                   style={{ position: 'absolute' }}
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
               <div className="" style={{}}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
 
 
-                  <div class="col-md" style={{ backgroundColor: '#0077C4', border: '2px solid #7FB2E2', width: '343px', height: '252px', margin: '.02%' }}>
+                  <div class="col-md" style={{ backgroundColor: '#FF6C84', border: '2px solid #FF2C4E', width: '343px', height: '252px', margin: '.02%' }}>
                     <h4 style={{ color: 'white', display: 'flex', justifyContent: 'flex-start', marginLeft: '3%', marginTop: '7%' }}>Emergency</h4>
 
                     <h6 style={{ color: 'white', display: 'flex', justifyContent: 'center', marginLeft: '3%', marginTop: '7%' }}>
                       If you are in need of care outside of Innovate Health operating hours, call the emergency appointment number for emergency service.
                   </h6>
                     <br />
-                    <button className="btn btn-white btn-sm">Learn More ></button>
+                    <button style={{marginLeft: '3%'}} className="btn btn-white btn-sm">Learn More ></button>
                   </div>
-                  <div class="col-md" style={{ backgroundColor: '#7FB2E2', border: '2px solid #0077C4', width: '343px', height: '252px', margin: '.02%' }}>
-                    <h4 style={{ color: 'white', display: 'flex', justifyContent: 'flex-start', marginLeft: '3%', marginTop: '7%' }}>Register</h4>
+                  <div class="col-md" style={{ backgroundColor: '#FF2C4E', border: '2px solid #FF6C84', width: '343px', height: '252px', margin: '.02%' }}>
+                    <h4 style={{ color: 'white', display: 'flex', justifyContent: 'flex-start', marginLeft: '3%', marginTop: '7%' }}>Login</h4>
 
                     <h6 style={{ color: 'white', display: 'flex', justifyContent: 'center', marginLeft: '3%', marginTop: '7%' }}>
                       Innovate Health is committed to providing world-class care to every patient.
@@ -81,7 +126,7 @@ class Home extends Component {
                       <div className="m-5">{!isLoggedIn() && <DoctorAuth2 />}</div>
                     </div>
                   </div>
-                  <div class="col-md" style={{ backgroundColor: '#0077C4', border: '2px solid #7FB2E2', width: '343px', height: '252px', margin: '.02%' }}>
+                  <div class="col-md" style={{ backgroundColor: '#FF6C84', border: '2px solid #FF2C4E', width: '343px', height: '252px', margin: '.02%' }}>
                     <h4 style={{ color: 'white', display: 'flex', justifyContent: 'flex-start', marginLeft: '3%', marginTop: '7%' }}>Services</h4>
 
                     <div className="row">
@@ -118,7 +163,7 @@ class Home extends Component {
                     </div>
 
                   </div>
-                  <div class="col-md" style={{ backgroundColor: '#7FB2E2', border: '2px solid #0077C4', width: '343px', height: '252px', margin: '.02%' }}>
+                  <div class="col-md" style={{ backgroundColor: '#FF2C4E', border: '2px solid #FF6C84', width: '343px', height: '252px', margin: '.02%' }}>
                     <h4 style={{ color: 'white', display: 'flex', justifyContent: 'flex-start', marginLeft: '3%', marginTop: '7%' }}>Hours</h4>
                     <br />
                     <div className="row">
@@ -165,7 +210,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="row" style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="row" style={{ display: 'flex', justifyContent: 'center'}}>
             <div className="col-md-2"></div>
             <div className="col-md-4">
               <div style={{ display: 'flex', justifyContent: 'center' }}><h1 style={{ marginTop: '7%' }}>A Clinic Who Cares</h1>
