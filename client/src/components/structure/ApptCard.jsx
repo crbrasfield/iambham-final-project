@@ -40,7 +40,7 @@ export default ({ appointment, cancelAppointment }) => {
         </div>
         <div className="mb-0 text-secondary" style={{ flex: 1 }}>
           {appointment.doctorid ? (
-            <Link to={`/doctor/${appointment.doctorid}`}>{doctorid}</Link>
+            <Link to={`/doctor/${appointment.doctorid}`}>Doctor</Link>
           ) : (
             "-"
           )}

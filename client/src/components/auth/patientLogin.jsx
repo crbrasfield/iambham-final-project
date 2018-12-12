@@ -49,6 +49,7 @@ class patientLogin extends Component {
   }
 
   render() {
+  
     const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { redirectToReferrer, checkingLogin } = this.state;
 
@@ -63,6 +64,7 @@ class patientLogin extends Component {
       <div
         className="container"
         style={{
+          // border: "300px solid #343A40",
           display: "flex",
           justifyContent: "space-between",
           marginTop: "150px"
@@ -97,7 +99,11 @@ class patientLogin extends Component {
           <button type="submit" className="btn btn-primary">
             Login
           </button>
-          <PatientSignUp />
+          <div>
+            <p>New to Innovate Health?</p>
+            <span>Click Here ></span><PatientSignUp />
+          </div>
+          
         </form>
         <img
           src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/e20d3b56093929.599fd7b26b7e1.gif"
@@ -107,15 +113,5 @@ class patientLogin extends Component {
     );
   }
 }
-
-const alertStyle = {
-  padding: "20px",
-  marginTop: "7%"
-};
-
-const addBlogFormStyle = {
-  border: "10px solid darkcyan",
-  padding: "50px"
-};
 
 export default patientLogin;
