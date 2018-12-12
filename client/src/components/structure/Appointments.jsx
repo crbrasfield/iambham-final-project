@@ -55,30 +55,27 @@ class Appointments extends Component {
       appointmentWasCanceled:
         this.props.location.state &&
         this.props.location.state.appointmentWasCanceled,
-        lastname:
-          this.props.value
+      lastname: this.props.value
     });
 
     console.log(this.state.appointments, this.state.myDocAppointments);
   }
 
   async handleNewAppointment() {
-
     console.log(this.state);
 
     try {
-        let newPatient = await fetch('api/new/createpatient', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(this.state)
-        });
-   
+      let newPatient = await fetch("api/new/createpatient", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.state)
+      });
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
-}
+  }
 
   cancelAppointment = id => {
     appointmentService.destroy(id).then(res => {
@@ -246,67 +243,6 @@ class Appointments extends Component {
       );
     }
   }
-  else {
-    return(
-      <React.Fragment>
-      <div className="container pt-5">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          }}
-        >
-          <h1 className="text-info">Appointments</h1>
-          <button
-            style={{
-              display: "flex",
-              justifyContent: "center"
-            }}
-            className="btn btn-outline-primary">
-            My Appointments
-          </button>
-        </div>
-
-        {this.state.appointmentWasCreated && (
-          <div className="alert alert-success" role="alert">
-            Appointment created!
-          </div>
-        )}
-
-        {this.state.appointmentWasCanceled && (
-          <div className="alert alert-success" role="alert">
-            Appointment cancelled!
-          </div>
-        )}
-        <div className="card" style={{ margin: "5px" }}>
-          <div
-            className="card-header"
-            style={{
-              display: "flex"
-            }}
-          >
-            <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-              Date
-            </h5>
-            <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-              Description
-            </h5>
-            <h5 className="mb-0 text-info" style={{ flex: 1 }}>
-              Doctor
-            </h5>
-          </div>
-        </div>
-        <ApptTimeline
-          cancelAppointment={this.cancelAppointment}
-          appts={this.state.appointments}
-        />
-        <div style={{ height: "250px" }} />
-      </div>
-    </React.Fragment>
-    )
-  }
-}
 }
 
 export default Appointments;
