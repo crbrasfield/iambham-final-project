@@ -38,22 +38,6 @@ export default class NewAppointment extends React.Component {
     });
   };
 
-  async handleNewAppt() {
-
-    try {
-        let newAppt = await fetch('api/appointments', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(this.state)
-        });
-        this.setState({ newAppt });
-    } catch (err) {
-        console.error(err);
-    }
-}
-
   today = () => {
     const date = new Date();
     const month = date.getMonth();
@@ -124,9 +108,7 @@ export default class NewAppointment extends React.Component {
             </select>
           </div>
 
-          <button type="submit" className="btn btn-info" onClick={(e) => {
-              e.preventDefault();
-              this.handleNewAppt()}}>
+          <button type="submit" className="btn btn-info">
             Submit
           </button>
         </form>
