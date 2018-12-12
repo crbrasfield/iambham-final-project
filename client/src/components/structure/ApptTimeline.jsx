@@ -16,7 +16,7 @@ class ApptTimeline extends Component {
 
   componentDidMount() {
     fetchDoctors().then(doctors => {
-      console.log(doctors);
+
       this.setState({ doctors });
     });
   }
@@ -28,6 +28,8 @@ class ApptTimeline extends Component {
   }
 
   render() {
+    // console.log("from render", this.state.appts)
+
     return (
       <div>
         <div className="accordion" id="accordionExample">
@@ -37,7 +39,7 @@ class ApptTimeline extends Component {
                 <div style={{ margin: "5px" }}>
                   <ApptCard
                     cancelAppointment={this.props.cancelAppointment}
-                    key={appt.appointment_id}
+                    key={appt.id}
                     appointment={appt}
                     doctor={this.state.doctors.find(d => d.id == appt.doctorid)}
                   />

@@ -15,7 +15,7 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log("current user:", this.state.user);
+    // console.log("current user:", this.state.user);
     return (
       <div>
         <div className="navbar fixed-top navbar-dark bg-dark">
