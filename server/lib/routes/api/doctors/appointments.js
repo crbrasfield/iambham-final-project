@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var router = (0, _express.Router)();
 var apptTable = new _table.default('appointments');
-router.get(router.get('/:id?', function (req, res) {
+router.get('/:id?', function (req, res) {
   var id = req.params.id;
   var user = req.user;
 
@@ -34,6 +34,19 @@ router.get(router.get('/:id?', function (req, res) {
   } else {
     res.sendStatus(401);
   }
-}));
+});
+router.put('/:id', function (req, res) {
+  var id = req.params.id;
+  var user = req.user;
+  var editAppt = req.body;
+
+  if (user.user_type === 'doctor') {
+    apptTable.update(id, editAppt).then(function (results) {
+      return res.send(results);
+    }).catch(function (err) {
+      return res.sendStatus(500);
+    });
+  }
+});
 var _default = router;
 exports.default = _default;

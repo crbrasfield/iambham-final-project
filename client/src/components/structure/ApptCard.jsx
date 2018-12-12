@@ -1,21 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default ({ appointment, cancelAppointment }) => {
+export default ({ appointment, cancelAppointment, doctor }) => {
   const date = new Date(appointment.date);
 
   const month = date.getMonth();
   const day = date.getDate();
   const year = date.getFullYear();
 
+  console.log(doctor);
+
   return (
     <div
-      class="card"
+      className="card"
       key={appointment.appointment_id}
       style={{ width: "100%" }}
     >
       <div
-        class="card-header"
+        className="card-header"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -23,9 +25,9 @@ export default ({ appointment, cancelAppointment }) => {
         }}
         id={`apt-${appointment.appointment_id}`}
       >
-        <div class="mb-0" style={{ flex: 1 }}>
+        <div className="mb-0" style={{ flex: 1 }}>
           <button
-            class="btn btn-link text-info"
+            className="btn btn-link text-info"
             type="button"
             data-toggle="collapse"
             data-target={`#collapse${appointment.appointment_id}`}
@@ -35,12 +37,14 @@ export default ({ appointment, cancelAppointment }) => {
             {month}/{day}/{year}
           </button>
         </div>
-        <div class="mb-0 text-secondary" style={{ flex: 1 }}>
+        <div className="mb-0 text-secondary" style={{ flex: 1 }}>
           {appointment.description.substring(0, 10)}...
         </div>
-        <div class="mb-0 text-secondary" style={{ flex: 1 }}>
+        <div className="mb-0 text-secondary" style={{ flex: 1 }}>
           {appointment.doctorid ? (
-            <Link to={`/doctor/${appointment.doctorid}`}>Doctor</Link>
+            <Link to={`/doctor/${appointment.doctorid}`}>
+              Dr. {doctor.last_name}
+            </Link>
           ) : (
             "-"
           )}
@@ -49,11 +53,11 @@ export default ({ appointment, cancelAppointment }) => {
 
       <div
         id={`collapse${appointment.appointment_id}`}
-        class="collapse hide"
+        className="collapse hide"
         aria-labelledby={`apt-${appointment.appointment_id}`}
         data-parent="#accordionExample"
       >
-        <div class="card-body clearfix">
+        <div className="card-body clearfix">
           <div>{appointment.description}</div>
           <hr />
           <button
@@ -64,7 +68,17 @@ export default ({ appointment, cancelAppointment }) => {
             }}
           >
             Cancel appointment
-          </button>
+          </button> 
+        </div>
+        <div className="card-body clearfix">
+          <div>{appointment.description}</div>
+          <hr />
+          <button
+            className="btn btn-danger mt-2 float-right"
+            style={{ marginLeft: "auto" }}
+          >
+            Edit appointment
+          </button>  
         </div>
       </div>
     </div>

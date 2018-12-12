@@ -29,11 +29,6 @@ class NavBar extends Component {
                 : "Appointments"}
             </Link>
           )}
-          {this.props.isLoggedIn && (
-            <Link to="/Schedule" className="navbar-brand">
-              Schedule
-            </Link>
-          )}
 
           {!this.props.isLoggedIn && (
             <Link to="/aboutInnovateHealth" className="navbar-brand">
