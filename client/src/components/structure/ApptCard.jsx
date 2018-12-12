@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 export default ({ appointment, cancelAppointment, doctor }) => {
   const date = new Date(appointment.date);
 
-  const month = date.getMonth();
+  console.log(date);
+
+  const month = date.getMonth() + 1;
   const day = date.getDate();
   const year = date.getFullYear();
 
-  console.log(doctor);
+  console.log(month, "asdfasdfasafasddf");
 
   return (
     <div
@@ -60,6 +62,7 @@ export default ({ appointment, cancelAppointment, doctor }) => {
         <div className="card-body clearfix">
           <div>{appointment.description}</div>
           <hr />
+
           <button
             className="btn btn-danger mt-2 float-right"
             style={{ marginLeft: "auto" }}
@@ -68,18 +71,14 @@ export default ({ appointment, cancelAppointment, doctor }) => {
             }}
           >
             Cancel appointment
-          </button> 
-        </div>
-        <div className="card-body clearfix">
-          <div>{appointment.description}</div>
-          <hr />
+          </button>
           <Link
-            className="btn btn-danger mt-2 float-right"
-            style={{ marginLeft: "auto" }}
+            className="btn btn-info mt-2 float-right"
+            style={{ marginLeft: "10px" }}
             to={`appointments/${appointment.appointment_id}/edit`}
           >
             Edit appointment
-          </Link>  
+          </Link>
         </div>
       </div>
     </div>
