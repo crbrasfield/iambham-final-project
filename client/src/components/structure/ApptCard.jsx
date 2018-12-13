@@ -4,18 +4,14 @@ import { Link } from "react-router-dom";
 export default ({ appointment, cancelAppointment, doctor }) => {
   const date = new Date(appointment.date);
 
-  // console.log("from apptcard", appointment);
-
   const month = date.getMonth();
   const day = date.getDate();
   const year = date.getFullYear();
 
-  console.log(month, "asdfasdfasafasddf");
-
   return (
     <div
       className="card"
-      key={appointment.id}
+      key={appointment.appointment_id}
       style={{ width: "100%" }}
     >
       <div
@@ -25,16 +21,16 @@ export default ({ appointment, cancelAppointment, doctor }) => {
           justifyContent: "space-between",
           alignItems: "center"
         }}
-        id={`apt-${appointment.id}`}
+        id={`apt-${appointment.appointment_id}`}
       >
         <div className="mb-0" style={{ flex: 1 }}>
           <button
             className="btn btn-link text-info"
             type="button"
             data-toggle="collapse"
-            data-target={`#collapse${appointment.id}`}
+            data-target={`#collapse${appointment.appointment_id}`}
             aria-expanded="true"
-            aria-controls={`#collapse${appointment.id}`}
+            aria-controls={`#collapse${appointment.appointment_id}`}
           >
             {month}/{day}/{year}
           </button>
@@ -54,9 +50,9 @@ export default ({ appointment, cancelAppointment, doctor }) => {
       </div>
 
       <div
-        id={`collapse${appointment.id}`}
+        id={`collapse${appointment.appointment_id}`}
         className="collapse hide"
-        aria-labelledby={`apt-${appointment.id}`}
+        aria-labelledby={`apt-${appointment.appointment_id}`}
         data-parent="#accordionExample"
       >
         <div className="card-body clearfix">
@@ -67,7 +63,7 @@ export default ({ appointment, cancelAppointment, doctor }) => {
             className="btn btn-danger mt-2 float-right"
             style={{ marginLeft: "auto" }}
             onClick={() => {
-              cancelAppointment(appointment.id);
+              cancelAppointment(appointment.appointment_id);
             }}
           >
             Cancel appointment
@@ -75,7 +71,7 @@ export default ({ appointment, cancelAppointment, doctor }) => {
           <Link
             className="btn btn-info mt-2 float-right"
             style={{ marginLeft: "10px" }}
-            to={`appointments/${appointment.id}/edit`}
+            to={`appointments/${appointment.appointment_id}/edit`}
           >
             Edit appointment
           </Link>
