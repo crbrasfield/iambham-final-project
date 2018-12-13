@@ -27,7 +27,7 @@ class IndividualDoctor extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container mt-5 mb-5">
         <h1>
           Doctor: {this.state.doctor.first_name} {this.state.doctor.last_name}
         </h1>
