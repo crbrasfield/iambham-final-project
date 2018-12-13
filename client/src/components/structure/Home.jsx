@@ -18,46 +18,25 @@ class Home extends Component {
             className="cont"
             style={{ position: "relative", marginLeft: "0%" }}
           >
-            <h3 className="text-center text-info w-75 m-auto pt-5">
-              Innovate Health is a major center for clinical use. Our faculty
-              physicians, nursing staff, and support personnel are committed to
-              providing world-class care to every patient.
-            </h3>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center"
-              }}
-            >
-              <div className="m-5">{!isLoggedIn() && <PatientAuth />}</div>
-              <div className="m-5">{!isLoggedIn() && <DoctorAuth />}</div>
-            </div>
-
-            <div
-              class="row"
-              style={{ display: "flex", justifyContent: "center" }}
-            >
+            <div style={{ marginLeft: "12%" }}>
               <div
-                className="col-md-8"
-                style={{
-                  display: "flex",
-                  justifyContent: "center"
-                }}
+                className="row"
+                style={{ width: "88%", border: "5px solid #FF2C4E" }}
               >
-                <img
-                  src="https://media.istockphoto.com/vectors/thin-medical-line-health-care-white-seamless-pattern-vector-id486351452    "
-                  style={{
-                    zIndex: "-1",
-                    position: "relative",
-                    width: "2000px",
-                    height: "545px"
-                  }}
-                />
-                <img
-                  src="http://landing.sanitasweb.es/globalcare/welcomecenter/wp-content/uploads/2016/02/hospital.gif"
-                  alt="hospital"
-                  style={{ position: "absolute" }}
-                />
+                <div
+                  className="col-sm-3"
+                  style={{ margin: "7%", marginTop: "15%" }}
+                >
+                  <h1 style={{ textAlign: "center" }}>Doctors Who Care</h1>
+                  <h1 style={{ textAlign: "center" }}>Doctors You Can Trust</h1>
+                </div>
+
+                <div className="col-sm-6">
+                  <img
+                    src="https://i.pinimg.com/originals/20/90/62/20906274d1b4c47333a97c758db0b9a5.png"
+                    alt="innovate landing"
+                  />
+                </div>
               </div>
             </div>
 
@@ -70,8 +49,8 @@ class Home extends Component {
                   <div
                     class="col-md"
                     style={{
-                      backgroundColor: "#0077C4",
-                      border: "2px solid #7FB2E2",
+                      backgroundColor: "#FF6C84",
+                      border: "2px solid #FF2C4E",
                       width: "343px",
                       height: "252px",
                       margin: ".02%"
@@ -103,68 +82,68 @@ class Home extends Component {
                       emergency service.
                     </h6>
                     <br />
-                    <button className="btn btn-white btn-sm">
+                    <button
+                      style={{ marginLeft: "3%" }}
+                      className="btn btn-white btn-sm"
+                    >
                       Learn More >
                     </button>
                   </div>
-                  {!isLoggedIn() && (
-                    <div
-                      class="col-md"
-                      style={{
-                        backgroundColor: "#7FB2E2",
-                        border: "2px solid #0077C4",
-                        width: "343px",
-                        height: "252px",
-                        margin: ".02%"
-                      }}
-                    >
-                      <h4
-                        style={{
-                          color: "white",
-                          display: "flex",
-                          justifyContent: "flex-start",
-                          marginLeft: "3%",
-                          marginTop: "7%"
-                        }}
-                      >
-                        Register
-                      </h4>
-
-                      <h6
-                        style={{
-                          color: "white",
-                          display: "flex",
-                          justifyContent: "center",
-                          marginLeft: "3%",
-                          marginTop: "7%"
-                        }}
-                      >
-                        Innovate Health is committed to providing world-class
-                        care to every patient.
-                      </h6>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          marginBottom: "0%"
-                        }}
-                      >
-                        <div className="m-5">
-                          <PatientAuth2 />
-                        </div>
-                        <div className="m-5">
-                          <DoctorAuth2 />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
                   <div
                     class="col-md"
                     style={{
-                      backgroundColor: "#0077C4",
-                      border: "2px solid #7FB2E2",
+                      backgroundColor: "#FF2C4E",
+                      border: "2px solid #FF6C84",
+                      width: "343px",
+                      height: "252px",
+                      margin: ".02%"
+                    }}
+                  >
+                    <h4
+                      style={{
+                        color: "white",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        marginLeft: "3%",
+                        marginTop: "7%"
+                      }}
+                    >
+                      Login
+                    </h4>
+
+                    <h6
+                      style={{
+                        color: "white",
+                        display: "flex",
+                        justifyContent: "center",
+                        marginLeft: "3%",
+                        marginTop: "7%"
+                      }}
+                    >
+                      Innovate Health is committed to providing world-class care
+                      to every patient.
+                    </h6>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginBottom: "0%"
+                      }}
+                    >
+                      <div className="m-5">
+                        {!isLoggedIn() && <PatientAuth2 />}
+                      </div>
+                      <div className="m-5">
+                        {!isLoggedIn() && <DoctorAuth2 />}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="col-md"
+                    style={{
+                      backgroundColor: "#FF6C84",
+                      border: "2px solid #FF2C4E",
                       width: "343px",
                       height: "252px",
                       margin: ".02%"
@@ -279,8 +258,8 @@ class Home extends Component {
                   <div
                     class="col-md"
                     style={{
-                      backgroundColor: "#7FB2E2",
-                      border: "2px solid #0077C4",
+                      backgroundColor: "#FF2C4E",
+                      border: "2px solid #FF6C84",
                       width: "343px",
                       height: "252px",
                       margin: ".02%"
@@ -297,7 +276,7 @@ class Home extends Component {
                     >
                       Hours
                     </h4>
-                    <br />
+
                     <div className="row">
                       <div className="col-md-5">
                         <h6

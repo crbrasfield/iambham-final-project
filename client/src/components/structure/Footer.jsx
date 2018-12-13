@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 class Footer extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Footer extends Component {
           <div className="col-md-4">
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}
@@ -77,7 +77,7 @@ class Footer extends Component {
           <div className="col-md-2">
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}
@@ -85,33 +85,36 @@ class Footer extends Component {
               EXPLORE
             </h5>
 
-            <h6
+            <a
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              href="http://www.innovatebham.com"
             >
               Locations
-            </h6>
-            <h6
+            </a>
+            <a
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              href="http://www.innovatebham.com"
             >
               Services
-            </h6>
-            <h6
+            </a>
+            <a
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              href="http://www.innovatebham.com"
             >
               Patients
-            </h6>
+            </a>
             <Link
               style={{
                 color: "white",
@@ -122,20 +125,21 @@ class Footer extends Component {
             >
               Doctors
             </Link>
-            <h6
+            <a
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              href="http://www.innovatebham.com"
             >
               Nurses
-            </h6>
+            </a>
           </div>
           <div className="col-md-3">
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}
@@ -180,7 +184,7 @@ class Footer extends Component {
           >
             <h5
               style={{
-                color: "#16A2B7",
+                color: "#FF2C4E",
                 display: "flex",
                 justifyContent: "center"
               }}
