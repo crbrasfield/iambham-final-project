@@ -85,15 +85,17 @@ class Footer extends Component {
               EXPLORE
             </h5>
 
-            <h6
+            <Link
               style={{
                 color: "white",
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
+                fontWeight: "bold"
               }}
+              to="/aboutInnovateHealth"
             >
-              Locations
-            </h6>
+              About Us
+            </Link>
             <h6
               style={{
                 color: "white",
@@ -116,7 +118,8 @@ class Footer extends Component {
               style={{
                 color: "white",
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
+                fontWeight: "bold"
               }}
               to="/doctors"
             >
