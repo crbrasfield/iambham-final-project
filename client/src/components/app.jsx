@@ -20,8 +20,9 @@ import doctorLogin from "./auth/doctorLogin";
 import patientLogin from "./auth/patientLogin";
 import Profile from "./structure/profile";
 import Footer from "./structure/Footer";
-import PatientSignUp from "./auth/patientSignUp"
+import PatientSignUp from "./auth/patientSignUp";
 import ListDocs from "./structure/DoctorCard";
+import Header from "./structure/Header";
 
 class Navigation extends Component {
   state = {
@@ -45,6 +46,7 @@ class Navigation extends Component {
         <Fragment>
           <NavBar isLoggedIn={isLoggedIn()} />
           <div className="" style={{ marginTop: "50px" }}>
+            <Header />
             <Switch>
               <Route path="/login" component={Login} />
               <Route exact path="/patientLogin" component={patientLogin} />
