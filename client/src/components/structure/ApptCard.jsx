@@ -8,8 +8,6 @@ export default ({ appointment, cancelAppointment, doctor }) => {
   const day = date.getDate();
   const year = date.getFullYear();
 
-  console.log(doctor);
-
   return (
     <div
       className="card"
@@ -32,7 +30,7 @@ export default ({ appointment, cancelAppointment, doctor }) => {
             data-toggle="collapse"
             data-target={`#collapse${appointment.appointment_id}`}
             aria-expanded="true"
-            aria-controls={`collapse${appointment.appointment_id}`}
+            aria-controls={`#collapse${appointment.appointment_id}`}
           >
             {month}/{day}/{year}
           </button>
@@ -60,6 +58,7 @@ export default ({ appointment, cancelAppointment, doctor }) => {
         <div className="card-body clearfix">
           <div>{appointment.description}</div>
           <hr />
+
           <button
             className="btn btn-danger mt-2 float-right"
             style={{ marginLeft: "auto" }}
@@ -68,17 +67,14 @@ export default ({ appointment, cancelAppointment, doctor }) => {
             }}
           >
             Cancel appointment
-          </button> 
-        </div>
-        <div className="card-body clearfix">
-          <div>{appointment.description}</div>
-          <hr />
-          <button
-            className="btn btn-danger mt-2 float-right"
-            style={{ marginLeft: "auto" }}
+          </button>
+          <Link
+            className="btn btn-info mt-2 float-right"
+            style={{ marginLeft: "10px" }}
+            to={`appointments/${appointment.appointment_id}/edit`}
           >
             Edit appointment
-          </button>  
+          </Link>
         </div>
       </div>
     </div>
