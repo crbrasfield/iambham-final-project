@@ -69,7 +69,7 @@ export default ({ appointment, cancelAppointment, doctor }) => {
             Cancel appointment
           </button>
           <Link
-            className="btn btn-info mt-2 float-right"
+            className="btn btn-info mt-2 mr-2 float-right"
             style={{ marginLeft: "10px" }}
             to={`appointments/${appointment.appointment_id}/edit`}
           >
