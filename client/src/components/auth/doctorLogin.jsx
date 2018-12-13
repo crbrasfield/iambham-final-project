@@ -60,16 +60,19 @@ class doctorLogin extends Component {
     }
 
     return (
-      <div
+      <React.Fragment>
+        <div
         className="container"
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          marginTop: "150px"
+          marginTop: '50px',
+          justifyContent: "space-between", border: '5px solid #E2A2A4', paddingRight: '0px',
+          paddingLeft: '44px',
+          backgroundColor: '#F2B6B3'
         }}
       >
-        <form onSubmit={this.login}>
-          <div className="form-group">
+        <form style={{marginTop: '14%'}} onSubmit={this.login}>
+          <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input
               placeholder="Email"
@@ -80,7 +83,7 @@ class doctorLogin extends Component {
               required
             />
           </div>
-          <div className="form-group">
+          <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input
               placeholder="Password"
@@ -94,16 +97,21 @@ class doctorLogin extends Component {
           {this.state.feedbackMessage ? (
             <p>{this.state.feedbackMessage}</p>
           ) : null}
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" class="btn btn-info">
             Login
           </button>
-          <DoctorSignUp />
+          <div>
+            <p>New to Innovate Health?</p>
+            <span>Click Here ></span><DoctorSignUp />
+          </div>
         </form>
-        <img
+        <img style={{}}
           src="https://i.pinimg.com/originals/b6/21/c9/b621c9205402362ae059e5936f82e2fa.gif"
           alt="doctor login img"
         />
-      </div>
+      </div> <br/><br/><br/><br/>
+      </React.Fragment>
+      
     );
   }
 }

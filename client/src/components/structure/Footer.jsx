@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 
 class Footer extends Component {
   constructor(props) {
@@ -84,51 +85,56 @@ class Footer extends Component {
               EXPLORE
             </h5>
 
-            <h6
+            <Link
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              to="/innovatebham"
             >
               Locations
-            </h6>
-            <h6
+            </Link>
+            <Link
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              to="/innovatebham"
             >
               Services
-            </h6>
-            <h6
+            </Link>
+            <Link
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              to="/innovatebham"
             >
               Patients
-            </h6>
-            <h6
+            </Link>
+            <Link
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              to="/doctors"
             >
               Doctors
-            </h6>
-            <h6
+            </Link>
+            <Link
               style={{
                 color: "white",
                 display: "flex",
                 justifyContent: "center"
               }}
+              to="/innovatebham"
             >
               Nurses
-            </h6>
+            </Link>
           </div>
           <div className="col-md-3">
             <h5

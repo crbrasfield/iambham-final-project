@@ -49,7 +49,6 @@ class patientLogin extends Component {
   }
 
   render() {
-  
     const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { redirectToReferrer, checkingLogin } = this.state;
 
@@ -61,17 +60,20 @@ class patientLogin extends Component {
     }
 
     return (
-      <div
+      <React.Fragment>
+        <div
         className="container"
         style={{
-          // border: "300px solid #343A40",
           display: "flex",
           justifyContent: "space-between",
-          marginTop: "150px"
+          border: '5px solid #F47D21', paddingRight: '0px',
+          paddingLeft: '44px',
+          marginTop: "50px",
+          backgroundColor: '#F78C3A'
         }}
       >
-        <form onSubmit={this.login}>
-          <div className="form-group">
+        <form style={{marginTop: '14%'}} onSubmit={this.login}>
+          <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input
               placeholder="Email"
@@ -82,7 +84,7 @@ class patientLogin extends Component {
               required
             />
           </div>
-          <div className="form-group">
+          <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input
               placeholder="Password"
@@ -96,20 +98,21 @@ class patientLogin extends Component {
           {this.state.feedbackMessage ? (
             <p>{this.state.feedbackMessage}</p>
           ) : null}
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" class="btn btn-dark">
             Login
           </button>
           <div>
             <p>New to Innovate Health?</p>
             <span>Click Here ></span><PatientSignUp />
           </div>
-          
         </form>
         <img
           src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/e20d3b56093929.599fd7b26b7e1.gif"
           alt="patient login img"
         />
-      </div>
+      </div> <br/><br/><br/><br/>
+      </React.Fragment>
+      
     );
   }
 }

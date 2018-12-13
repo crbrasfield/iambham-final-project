@@ -59,9 +59,10 @@ export default class NewAppointment extends React.Component {
   };
 
   render() {
+    console.log(this.state);
     return (
       <div className="container pt-5">
-        <h1 className="text-info mb-2">New Appointment</h1>
+        <h1 className="text-info mb-2">New appointment</h1>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>When would you like to be seen?</label>

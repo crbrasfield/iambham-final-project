@@ -20,7 +20,9 @@ import doctorLogin from "./auth/doctorLogin";
 import patientLogin from "./auth/patientLogin";
 import Profile from "./structure/profile";
 import Footer from "./structure/Footer";
-import PatientSignUp from "./auth/patientSignUp";
+import PatientSignUp from "./auth/patientSignUp"
+import ListDocs from "./structure/DoctorCard";
+import Header from './structure/Header';
 
 class Navigation extends Component {
   state = {
@@ -44,16 +46,18 @@ class Navigation extends Component {
         <Fragment>
           <NavBar isLoggedIn={isLoggedIn()} />
           <div className="" style={{ marginTop: "50px" }}>
+          <Header />
             <Switch>
+            <Route exact path='/innovatebham' component={() => window.location = "https://www.innovatebham.com/"}/>
               <Route path="/login" component={Login} />
               <Route exact path="/patientLogin" component={patientLogin} />
               <Route exact path="/doctorLogin" component={doctorLogin} />
               <Route exact path="/logout" component={Logout} />
               <Route exact path="/" component={Home} />
-              <Route exact path="patientsignup" component={PatientSignUp} />
               <Route exact path="/aboutInnovateHealth" component={About} />
               <PrivateRoute exact path="/profile" component={Profile} />
               <PrivateRoute exact path="/schedule" component={Schedule} />
+              <Route exact path="/patientsignup" component={PatientSignUp} />
               <PrivateRoute
                 exact
                 path="/appointments"
@@ -84,6 +88,7 @@ class Navigation extends Component {
                 path="/doctor/:id"
                 component={IndividualDoctor}
               />
+              <Route exact path="/doctors" component={ListDocs} />
             </Switch>
           </div>
           <Footer />

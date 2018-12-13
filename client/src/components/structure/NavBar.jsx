@@ -15,7 +15,7 @@ class NavBar extends Component {
   }
 
   render() {
-    console.log("current user:", this.state.user);
+    // console.log("current user:", this.state.user);
     return (
       <div>
         <div className="navbar fixed-top navbar-dark bg-dark">
@@ -27,11 +27,6 @@ class NavBar extends Component {
               {this.state.user.user_type === "patient"
                 ? "My Appointments"
                 : "Appointments"}
-            </Link>
-          )}
-          {this.props.isLoggedIn && (
-            <Link to="/Schedule" className="navbar-brand">
-              Schedule
             </Link>
           )}
 

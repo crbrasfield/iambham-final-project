@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import * as userService from '../../services/user';
-import * as doctorService from '../../services/doctors';
 import { Redirect } from 'react-router-dom';
 import IndeterminateProgress from '../utilities/indeterminateProgress';
 
@@ -11,12 +10,11 @@ class DoctorSignUp extends Component {
         this.state = {
             newDoctor: {},
 
-            first_name: '',
-            last_name: '',
+            firstname: '',
+            lastname: '',
             number: '',
             email: '',
             password: '',
-            age: ''
 
 
         }
@@ -26,18 +24,17 @@ class DoctorSignUp extends Component {
         this.handleNumber = this.handleNumber.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        this.handleAge = this.handleAge.bind(this);
 
     }
 
     handleFirst(e) {
         // console.log(e.target.value);
-        this.setState({ first_name: e.target.value });
+        this.setState({ firstname: e.target.value });
     }
 
     handleLast(e) {
         // console.log(e.target.value);
-        this.setState({ last_name: e.target.value });
+        this.setState({ lastname: e.target.value });
     }
 
 
@@ -56,21 +53,16 @@ class DoctorSignUp extends Component {
         this.setState({ number: e.target.value });
     }
 
-    handleAge(e) {
-        this.setState({ age: e.target.value })
-    }
     async handleCreateDoctor() {
         try {
-            let newDoctor = doctorService.insert(this.state)
-            // let newDoctor = await fetch('api/new/createdoctor', {
-            //     method: 'POST',
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     },
-            //     body: JSON.stringify(this.state)
-            // });
-            // this.setState({ newDoctor });
-            this.props.history.replace('/');
+            let newDoctor = await fetch('api/createdoctor', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(this.state)
+            });
+            this.setState({ newDoctor });
         } catch (err) {
             console.error(err);
         }
@@ -79,7 +71,7 @@ class DoctorSignUp extends Component {
     render() {
         return (
             <React.Fragment>
-            <button type="button" className="btn btn-md btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Register</button>
+            <button type="button" className="btn btn-md btn-info" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Register</button>
 
         <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div className="modal-dialog" role="document">
@@ -101,25 +93,18 @@ class DoctorSignUp extends Component {
 
                     <div className="form-group col-md-4">
                         <label for="person"></label>
-                        <input type="text" className="form-control" value={this.state.first_name} onChange={this.handleFirst} aria-describedby="textHelp" placeholder="Enter First Name"
-                            // onChange={e => this.setState({ first_name: e.target.value })}
+                        <input type="text" className="form-control" value={this.state.firstname} onChange={this.handleFirst} aria-describedby="textHelp" placeholder="Enter First Name"
+                            // onChange={e => this.setState({ firstname: e.target.value })}
                              />
                     </div>
 
                     <div className="form-group col-md-4">
                         <label for="person"></label>
-                        <input type="text" className="form-control" value={this.state.last_name} onChange={this.handleLast} aria-describedby="textHelp" placeholder="Enter Last Name" 
-                        // onChange={e => this.setState({ last_name: e.target.value })} 
+                        <input type="text" className="form-control" value={this.state.lastname} onChange={this.handleLast} aria-describedby="textHelp" placeholder="Enter Last Name" 
+                        // onChange={e => this.setState({ lastname: e.target.value })} 
                         />
                     </div>
                     
-                    {/* <div className="form-group col-md-4">
-                        <label for="person"></label>
-                        <input type="text" className="form-control" value={this.state.age} onChange={this.handleAge} aria-describedby="textHelp" placeholder="Enter Age" 
-                        // onChange={e => this.setState({ last_name: e.target.value })} 
-                        />
-                    </div> */}
-
                     <div className="form-group col-md-4">
                         <label for="number"></label>
                         <input type="number" className="form-control" value={this.state.number} onChange={this.handleNumber} aria-describedby="textHelp" maxLength="10" placeholder="Phone Number"
@@ -159,7 +144,7 @@ class DoctorSignUp extends Component {
   <div className="modal-footer" style={{display: 'flex', justifyContent: 'space-between'}}>
     <button type="button" className="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
     <button type="button" className="btn btn-outline-dark" onClick={(e) => {
-                            // e.preventDefault();
+                            e.preventDefault();
                             this.handleCreateDoctor()}}>Register</button>
   </div>
 </div>

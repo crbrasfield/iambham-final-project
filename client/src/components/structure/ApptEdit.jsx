@@ -1,204 +1,144 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Input from './Input';
-import * as apptService from '../../services/appointments';
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+import * as appointmentService from "../../services/appointments";
+import { currentUser } from "../../services/user";
+import { throws } from "assert";
+import { all as fetchDoctors } from "../../services/doctors";
 
-class ApptEdit extends Component {
+export default class ApptEdit extends Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
-        this.state = {
+    this.state = {
+      user: {},
+      appointment: {},
+      description: "",
+      doctors: []
+    };
 
-            first_name: '',
-            last_name: '',
-            age: '',
-            email: '',
-            password: '',
-            number: '',
-            other: '',
-            description: ''
-        }
-        this.handleFirst = this.handleFirst.bind(this);
-        this.handleLast = this.handleLast.bind(this);
-        this.handleAge = this.handleAge.bind(this);
-        this.handleEmail = this.handleEmail.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
-        this.handleNumber = this.handleNumber.bind(this);
-        this.handleOther = this.handleOther.bind(this);
-        this.handleDescription = this.handleDescription.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
+  }
+
+  async componentDidMount() {
+    try {
+      let id = this.props.match.params.id;
+      let user = await currentUser();
+      let appointment = await appointmentService.one(id);
+      let doctors = await fetchDoctors();
+
+      appointment.date = new Date(appointment.date);
+
+      this.setState({
+        user,
+        appointment,
+        doctors,
+        description: appointment.description
+      });
+    } catch (err) {
+      console.error(err);
     }
+  }
 
-    async componentDidMount() {
-        try {
-            let res = await fetch(`/api/appointments/${this.props.match.params.id}`);
-            let appt = await res.json();
-            let first_name = appt.first_name;
-            let last_name = appt.last_name;
-            let age = appt.age;
-            let email = appt.email;
-            let password = appt.password;
-            let number = appt.number;
-            let other = appt.other;
-            let description = appt.description;
-            this.setState({ first_name: first_name, last_name: last_name, age: age, email: email, password: password, number: number, other: other, description: description });
-        } catch (e) { }
+  updateField = (field, value) => {
+    this.setState({
+      ...this.state,
+      appointment: { ...this.state.appointment, [field]: value }
+    });
+  };
+
+  assignDoctor = e => {
+    this.setState({
+      ...this.state,
+      appointment: {
+        ...this.state.appointment,
+        doctorid: Number(e.target.value) || null
+      }
+    });
+  };
+
+  async handleEdit(e) {
+    e.preventDefault();
+    try {
+      let id = this.props.match.params.id;
+      let editDescription = await appointmentService.update(
+        id,
+        this.state.appointment
+      );
+
+      this.props.history.replace(`/appointments`);
+    } catch (err) {
+      console.error(err);
     }
+  }
 
-    handleFirst(e) {
-        // console.log(e.target.value);
-        this.setState({
-            first_name: e.target.value
-        });
-    }
+  today = apptDate => {
+    console.log(apptDate);
+    const date = apptDate ? new Date(apptDate) : new Date();
+    const month = date.getMonth();
+    const day = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+    const year = date.getFullYear();
 
-    handleLast(e) {
-        // console.log(e.target.value);
-        this.setState({ last_name: e.target.value });
-    }
+    const today = `${year}-${month}-${day}`;
 
-    handleAge(e) {
-        // console.log(e.target.value);
-        this.setState({ age: e.target.value });
-    }
+    return today;
+  };
 
-    handleEmail(e) {
-        // console.log(e.target.value);
-        this.setState({ email: e.target.value });
-    }
+  render() {
+    console.log(this.state);
+    return (
+      <div className="container pt-5 pb-5">
+        <form onSubmit={this.handleEdit}>
+          <div className="form-group">
+            <label>When would you like to be seen?</label>
+            <input
+              required
+              type="date"
+              id="start"
+              name="trip-start"
+              value={this.state.appointment.date}
+              min={this.today()}
+              max="2018-12-31"
+              className="form-control"
+              onChange={e => {
+                this.updateField("date", e.target.value);
+              }}
+            />
+          </div>
+          <div className="form-group">
+            <label>Tell us whats wrong</label>
+            <textarea
+              required
+              type="text"
+              className="form-control"
+              placeholder="I'm feeling..."
+              onChange={e => {
+                this.updateField("description", e.target.value);
+              }}
+              value={this.state.appointment.description}
+            />
+          </div>
 
-    handlePassword(e) {
-        // console.log(e.target.value);
-        this.setState({ password: e.target.value });
-    }
+          <div className="form-group">
+            <label>Preferred Doctor</label>
+            <select
+              onChange={e => {
+                this.assignDoctor(e);
+              }}
+              className="form-control"
+              value={this.state.appointment.doctorid}
+            >
+              <option value="">Any</option>
+              {this.state.doctors.map(d => (
+                <option value={d.id}>Dr. {d.last_name}</option>
+              ))}
+            </select>
+          </div>
 
-    handleNumber(e) {
-        // console.log(e.target.value);
-        this.setState({ number: e.target.value });
-    }
-
-    handleOther(e) {
-        // console.log(e.target.value);
-        this.setState({ other: e.target.value });
-    }
-
-    handleDescription(e) {
-        // console.log(e.target.value);
-        this.setState({ description: e.target.value });
-    }
-
-    async handleSubmit(e) {
-        try {
-            let res = await apptService.insert(this.state);
-            this.props.history.replace(`/api/appointments/${this.props.match.params.id}`);
-            console.log(email, last_name, age, number, other);
-
-        }
-        catch (err) { console.log(`You've got yourself an error there : ${err}`) }
-    }
-
-    render() {
-        return (
-
-            <React.Fragment>
-                {/* <Input
-                    handleFirst={this.handleFirst}
-                    handleLast={this.handleLast}
-                    handleAge={this.handleAge}
-                    handleEmail={this.handleEmail}
-                    handlePassword={this.handlePassword}
-                    handleNumber={this.handleNumber}
-                    handleOther={this.handleOther}
-                    handleDescription={this.handleDescription}
-                    handleSubmit={this.handleSubmit}
-
-                    first_name={this.state.first_name}
-                    last_name={this.state.last_name}
-                    age={this.state.age}
-                    email={this.state.email}
-                    password={this.state.password}
-                    number={this.state.number}
-                    other={this.state.other}
-                    description={this.state.description}
-                    id={this.state.id}
-                /> */}
-
-                <form action="/appointments" method="GET" style={{ display: 'flex', marginTop: '3%', justifyItems: 'center' }}>
-                    <div>
-
-                        <div className="form-row">
-                            <div className="form-group col-md-5">
-                                <label for="person"></label>
-                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="First Name"
-                                    value= {this.state({ first_name: e.target.value })}  />
-                            </div>
-                            <div className="form-group col-md-5">
-                                <label for="person"></label>
-                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="Last Name" value= {this.state({last_name: e.target.value })} />
-                            </div>
-                            <div className="form-group col-md-2">
-                                <label for="age"></label>
-                                <input type="number" className="form-control" aria-describedby="textHelp" maxLength="2" placeholder="Age" value= {this.state({age: e.target.value })} />
-                            </div>
-                        </div>
-
-                        <div className="form-row">
-                            <div className="form-group col-md-5">
-                                <label for="email"></label>
-                                <input type="email" className="form-control" aria-describedby="textHelp" placeholder="Email" value= {this.state({email: e.target.value })} />
-                            </div>
-                            <div className="form-group col-md-4">
-                                <label for="exampleInputPassword1"></label>
-                                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value= {this.state({password: e.target.value })} />
-                            </div>
-                            <div className="form-group col-md-3">
-                                <label for="number"></label>
-                                <input type="number" className="form-control" aria-describedby="textHelp" maxLength="10" placeholder="Phone Number" value= {this.state({number: e.target.value })} />
-                            </div>
-                        </div>
-
-                        <div className="form-row">
-                            <div className="col-md-3">
-                                <select className="custom-select custom-select-md mb-3">
-                                    <option selected>Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                </select>
-                            </div>
-
-                            <div className="col-md-5">
-                                <select className="custom-select" size="2">
-                                    <option selected>Insurance</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                    <option value= {this.state({other: e.target.value })} value="other">Other</option>
-                                </select>
-                            </div>
-
-                            <div className="form-group col-md-4" style={{ display: 'flex', alignItems: 'flex-start' }}>
-                                <label for="other"></label>
-                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="(if other)" value= {this.state({other: e.target.value })} />
-                            </div>
-
-                        </div>
-
-                        <div className="form-row">
-                            <div className="form-group col-md-12">
-                                <label for="symptom">What can we help you with?</label>
-                                <input type="text" className="form-control" aria-describedby="textHelp" placeholder="Description" value= {this.state({description: e.target.value })} />
-                            </div>
-                        </div>
-                        <div id="bookIt" className="" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2.5%' }}>
-                            <Link className="btn btn-outline-danger" id="saveEdit" to={`/appointments/${this.props.match.params.id}`} >cancel</Link>
-                            <button type="submit" style={{ marginLeft: '1em' }} className="btn btn-outline-success" onClick={() => this.Delete(this.props.match.params.id)}>update</button>
-                        </div>
-
-                    </div>
-                </form>
-            </React.Fragment>
-        )
-    }
+          <button type="submit" className="btn btn-info">
+            Submit
+          </button>
+        </form>
+      </div>
+    );
+  }
 }
-
-export default ApptEdit;

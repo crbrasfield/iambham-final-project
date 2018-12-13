@@ -8,7 +8,7 @@ class PatientSignUp extends Component {
         super(props);
 
         this.state = {
-            newPatient: {},
+            //newPatient: {},
 
             first_name: '',
             last_name: '',
@@ -24,6 +24,7 @@ class PatientSignUp extends Component {
         this.handleNumber = this.handleNumber.bind(this);
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.handleAge = this.handleAge.bind(this);
 
     }
 
@@ -56,8 +57,9 @@ class PatientSignUp extends Component {
     handleAge(e) {
         this.setState({ age: e.target.value });
     }
-
-    async handleCreatePatient() {
+    
+    async handleCreatePatient(e) {
+        e.preventDefault();
 
         console.log(this.state);
 
@@ -69,7 +71,7 @@ class PatientSignUp extends Component {
                 },
                 body: JSON.stringify(this.state)
             });
-           // this.setState({ newPatient });
+            //this.setState({ newPatient });
         } catch (err) {
             console.error(err);
         }
@@ -79,7 +81,7 @@ class PatientSignUp extends Component {
         return (
 
             <React.Fragment>
-                <button type="button" className="btn btn-md btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Register</button>
+                <button type="button" className="btn btn-md btn-dark" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Register</button>
 
                 <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog" role="document">
@@ -109,6 +111,13 @@ class PatientSignUp extends Component {
                                             <div className="form-group col-md-4">
                                                 <label for="person"></label>
                                                 <input type="text" className="form-control" value={this.state.last_name} onChange={this.handleLast} aria-describedby="textHelp" placeholder="Enter Last Name"
+                                                // onChange={e => this.setState({ last_name: e.target.value })} 
+                                                />
+                                            </div>
+
+                                             <div className="form-group col-md-4">
+                                                <label for="person"></label>
+                                                <input type="text" className="form-control" value={this.state.age} onChange={this.handleAge} aria-describedby="textHelp" placeholder="Enter Age"
                                                 // onChange={e => this.setState({ last_name: e.target.value })} 
                                                 />
                                             </div>
@@ -147,10 +156,9 @@ class PatientSignUp extends Component {
                             <div className="modal-footer" style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <button type="button" className="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
                                 <button type="button" className="btn btn-outline-dark" onClick={(e) => {
-                                    // e.preventDefault();
+                                    e.preventDefault();
                                     this.handleCreatePatient()
                                 }}>Register</button>
-                                
                             </div>
                         </div>
                     </div>
